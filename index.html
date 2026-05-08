@@ -32,6 +32,7 @@
   .b-green{background:#EAF3DE;color:#27500A}
   .b-gray{background:#F1EFE8;color:#444441}
   .b-pink{background:#FBEAF0;color:#72243E}
+  .b-orange{background:#FEF0E6;color:#7A3010}
   #section-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px}
   .section-card{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:16px;cursor:pointer;transition:border-color .15s,box-shadow .15s}
   .section-card:hover{border-color:var(--border2);box-shadow:0 2px 8px rgba(0,0,0,.06)}
@@ -313,6 +314,30 @@ const SECTIONS = [
     ]
   },
   {
+    id:"community-skill-repos", color:"b-orange", badge:"Community",
+    title:"Community skill repos",
+    meta:"5 repos · open-source",
+    desc:"Curated public skill repos for Claude Code and AI agents — install and extend your stack",
+    type:"skills",
+    skills:[
+      {name:"marketingskills", tags:["marketing","cro","seo","copywriting","email","growth"], category:"marketing",
+       desc:"40+ marketing skills by Corey Haines. Foundation is product-marketing-context which every other skill reads first. Covers CRO (page, signup, onboard, form, popup, paywall), SEO (audit, AI-SEO, programmatic, schema), copy (writing, editing, cold-email, email sequences, social, video, image), paid ads, analytics, A/B testing, churn prevention, referral programs, pricing, revops, sales enablement, competitor profiling, launch strategy, and marketing psychology.",
+       rules:["Install: npx skills add coreyhaines31/marketingskills","Or via Claude Code plugin: /plugin marketplace add coreyhaines31/marketingskills","Foundation skill product-marketing-context must exist before others activate","Skills cross-reference each other — copywriting <-> page-cro <-> ab-test-setup","Repo: github.com/coreyhaines31/marketingskills · 26.3k stars"]},
+      {name:"stop-slop", tags:["writing","prose","ai-tells","editing","quality"], category:"writing",
+       desc:"Single SKILL.md by Hardik Pandya that strips AI tells from prose. Catches banned phrases (throat-clearing openers, emphasis crutches, business jargon, adverbs), structural clichés (binary contrasts, dramatic fragmentation, false agency, narrator-from-a-distance), and sentence-level patterns (Wh- starters, em dashes, staccato fragmentation, lazy extremes). Scores output 1-10 across 5 dimensions: Directness, Rhythm, Trust, Authenticity, Density. Below 35/50 means revise.",
+       rules:["Install: copy SKILL.md into .claude/skills/ or upload to Claude Projects","No Wh- sentence starters","No em dashes — ever","Active voice required","No lazy extremes (never/always/everyone/nothing)","Repo: github.com/hardikpandya/stop-slop · 3k stars"]},
+      {name:"ui-ux-pro-max", tags:["ui","ux","design","frontend","figma","tailwind"], category:"design",
+       desc:"Design intelligence skill by nextlevelbuilder. v2.0 flagship feature: Design System Generator — analyzes project type and outputs full design system (pattern + style + colors + typography + effects + anti-patterns + checklist). Contains 67 UI styles, 161 industry-specific reasoning rules, 57 font pairings, 99 UX guidelines, 25 chart types, 15 tech stacks. Supports React, Next.js, Vue, Nuxt, Svelte, Astro, SwiftUI, Flutter, React Native, HTML+Tailwind, shadcn/ui.",
+       rules:["Install: npm install -g uipro-cli && uipro init --ai claude","Or via plugin: /plugin marketplace add nextlevelbuilder/ui-ux-pro-max-skill","Python 3.x required for design system search script","Generates design-system/MASTER.md + per-page overrides for hierarchical retrieval","Repo: github.com/nextlevelbuilder/ui-ux-pro-max-skill · 73.6k stars"]},
+      {name:"remotion-skills", tags:["video","remotion","animation","typescript","react"], category:"media",
+       desc:"Official agent skills package from the Remotion team (@remotion/skills). Provides Claude Code and AI agent context for programmatic video generation with Remotion — React-based video compositions, animations, and rendering pipelines. Internal package bundled with Remotion; auto-activates when working inside a Remotion project.",
+       rules:["Install: comes bundled with Remotion project install","Activates automatically for video composition and rendering tasks","TypeScript only — 100% TS codebase","Repo: github.com/remotion-dev/skills · 2.3k stars","No standalone install — use within a Remotion project context"]},
+      {name:"agent-skills-for-context-engineering", tags:["context","agents","llm","memory","multi-agent","architecture"], category:"ai-systems",
+       desc:"14 skills by Muratcan Koylan covering the full context engineering stack. Cited in Peking University academic research. Foundational: context-fundamentals, context-degradation, context-compression. Architectural: multi-agent-patterns, memory-systems, tool-design, filesystem-context, hosted-agents. Operational: context-optimization, latent-briefing, evaluation, advanced-evaluation. Methodology: project-development. Cognitive: bdi-mental-states (BDI ontology for deliberative reasoning).",
+       rules:["Install: /plugin marketplace add muratcankoylan/Agent-Skills-for-Context-Engineering","Or copy individual SKILL.md files into .claude/skills/","Progressive disclosure: load skill names first, full content only on activation","Platform-agnostic — works across Claude Code, Cursor, any agent platform","Repo: github.com/muratcankoylan/Agent-Skills-for-Context-Engineering · 15.4k stars"]}
+    ]
+  },
+  {
     id:"mcp-connectors", color:"b-gray", badge:"Claude.ai",
     title:"MCP connectors",
     meta:"9 connectors · OAuth",
@@ -477,7 +502,7 @@ function renderDetail(s, filter=''){
           <span class="badge b-gray">${sk.category}</span>
         </div>
         <p>${hl(sk.desc,filter)}</p>
-        <div class="section-label">Rules</div>
+        <div class="section-label">Install &amp; Notes</div>
         <ul class="skill-rules">${sk.rules.map(r=>`<li>${hl(r,filter)}</li>`).join('')}</ul>
         <div style="margin-top:8px">${sk.tags.map(t=>`<span class="skill-tag">${t}</span>`).join('')}</div>
       </div>`).join('')}
