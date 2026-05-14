@@ -316,7 +316,7 @@ const SECTIONS = [
   {
     id:"community-skill-repos", color:"b-orange", badge:"Community",
     title:"Community skill repos",
-    meta:"5 repos · open-source",
+    meta:"6 repos · open-source",
     desc:"Curated public skill repos for Claude Code and AI agents — install and extend your stack",
     type:"skills",
     skills:[
@@ -334,7 +334,10 @@ const SECTIONS = [
        rules:["Install: comes bundled with Remotion project install","Activates automatically for video composition and rendering tasks","TypeScript only — 100% TS codebase","Repo: github.com/remotion-dev/skills · 2.3k stars","No standalone install — use within a Remotion project context"]},
       {name:"agent-skills-for-context-engineering", tags:["context","agents","llm","memory","multi-agent","architecture"], category:"ai-systems",
        desc:"14 skills by Muratcan Koylan covering the full context engineering stack. Cited in Peking University academic research. Foundational: context-fundamentals, context-degradation, context-compression. Architectural: multi-agent-patterns, memory-systems, tool-design, filesystem-context, hosted-agents. Operational: context-optimization, latent-briefing, evaluation, advanced-evaluation. Methodology: project-development. Cognitive: bdi-mental-states (BDI ontology for deliberative reasoning).",
-       rules:["Install: /plugin marketplace add muratcankoylan/Agent-Skills-for-Context-Engineering","Or copy individual SKILL.md files into .claude/skills/","Progressive disclosure: load skill names first, full content only on activation","Platform-agnostic — works across Claude Code, Cursor, any agent platform","Repo: github.com/muratcankoylan/Agent-Skills-for-Context-Engineering · 15.4k stars"]}
+       rules:["Install: /plugin marketplace add muratcankoylan/Agent-Skills-for-Context-Engineering","Or copy individual SKILL.md files into .claude/skills/","Progressive disclosure: load skill names first, full content only on activation","Platform-agnostic — works across Claude Code, Cursor, any agent platform","Repo: github.com/muratcankoylan/Agent-Skills-for-Context-Engineering · 15.4k stars"]},
+      {name:"garden-skills (web-design-engineer)", tags:["design","html","css","ui","frontend","oklch","typography"], category:"design",
+       desc:"Single skill by ConardLi that transforms AI-generated web pages from functional to stunning. Distilled from the Claude Design system prompt (~420 lines). Enforces a 6-step workflow: understand requirements → gather design context → declare design system in Markdown → show v0 draft early → full build → verify. Key mechanisms: anti-AI-cliché blocklist (bans purple-pink gradients, Inter/Roboto/Arial fonts, emoji icons, fake testimonials), oklch perceptually-uniform color derivation, 6 curated color+font pairings (Modern tech, Elegant editorial, Premium brand, Lively consumer, Minimal professional, Artisan warmth), placeholder philosophy for missing assets, and an advanced-patterns.md reference library of code templates. Covers web pages, landing pages, interactive prototypes, slide decks (1920x1080), data visualizations (Chart.js/D3), animations, and design systems.",
+       rules:["Install: copy .agents/skills/web-design-engineer/ into your project (or .claude/skills/ for Claude Code)","Declare design system in Markdown BEFORE writing any code — non-negotiable","Show v0 draft with placeholders first; let user course-correct before full build","Never use: Inter/Roboto/Arial/Fraunces/system-ui fonts, purple-pink gradients, emoji as icons, fabricated stats","Use oklch() for all color derivation — not HSL or raw hex","Verify step required: no console errors, no rogue hues, responsive checks","Repo: github.com/ConardLi/garden-skills · 1.2k stars"]}
     ]
   },
   {
