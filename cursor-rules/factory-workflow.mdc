@@ -1,0 +1,51 @@
+---
+description: Software factory workflow rules. Apply to all feature implementation tasks.
+alwaysApply: true
+---
+
+# Software Factory Workflow
+
+## Before writing any code
+
+1. Map the codebase first. Ask: what files are relevant, what patterns exist, what risks are present. Do not guess.
+2. Write a user story with acceptance criteria. Get approval before designing anything.
+3. Write a technical brief. Get approval before touching files.
+
+## Building
+
+- Backend first, frontend second, acceptance tests third.
+- Read existing similar features and match their patterns exactly.
+- Write unit tests alongside production code, not after.
+- Never touch files outside the agreed scope.
+- Never add dependencies without explicit instruction.
+- Run typecheck + lint + tests before marking anything done.
+
+## Agent chain (use Cursor Agent tabs in parallel where safe)
+
+| Step | Agent tab | Job |
+|---|---|---|
+| 1 | Researcher | Map relevant code, read-only |
+| 2 | Story | User story + acceptance criteria |
+| 3 | Spec | Technical brief (data model, API, UI, tests) |
+| 4 | Backend | Services, routes, jobs, unit tests |
+| 5 | Frontend | Components, pages, hooks, component tests |
+| 6 | Tests | Acceptance tests against story |
+| 7 | Validator | Gap report vs brief |
+| 8 | PR Review | Checklist review before merge |
+
+**Read-only steps (1, 2, 3, 7, 8) can run in parallel.**
+**Write steps (4, 5, 6) must run in sequence.**
+
+## Approval gates (pause and show human)
+
+- After step 2: "Does this story match what you want?"
+- After step 3: "Any design red flags in this brief?"
+- After step 7: "Ready to open the PR?"
+
+## Hard rules
+
+- Business logic lives in services/domain modules, not route handlers or UI components.
+- Tenant isolation must be addressed explicitly in every feature brief.
+- No secrets, tokens, or raw payment data in logs or error responses.
+- Never commit .env, .key, .pem, secrets.json files.
+- If a critical finding is reported, fix it before opening the PR.
