@@ -1,50 +1,92 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Central Command</title>
+<title>Tool & Command Library</title>
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-:root{--bg:#fff;--bg2:#f8f8f7;--border:#e8e7e3;--border2:#d3d0c8;--text:#1a1a18;--text2:#6b6a66;--text3:#9a9894;--radius:8px;--radius-lg:12px;--font:Inter,system-ui,-apple-system,sans-serif}
-@media(prefers-color-scheme:dark){:root{--bg:#1a1a1a;--bg2:#242424;--border:#333;--border2:#444;--text:#e8e8e6;--text2:#9a9894;--text3:#666}}
-body{font-family:var(--font);color:var(--text);background:var(--bg);padding:20px;min-height:100vh}
-#top-bar{display:flex;align-items:center;gap:10px;margin-bottom:20px}
-#back-btn{display:none;background:none;border:0.5px solid var(--border2);border-radius:var(--radius);padding:6px 12px;font-size:13px;color:var(--text2);cursor:pointer}
-#back-btn:hover{border-color:var(--text3);color:var(--text)}
-#title{font-size:15px;font-weight:600}
-#search-bar,#local-search{width:100%;padding:10px 14px;font-size:14px;border:0.5px solid var(--border);border-radius:var(--radius);background:var(--bg2);color:var(--text);outline:none;margin-bottom:12px}
-#local-search{font-size:13px;padding:8px 12px;margin-bottom:10px}
-#count-label,#detail-count{font-size:12px;color:var(--text3);margin-bottom:14px}
-.badge{display:inline-block;font-size:11px;padding:2px 8px;border-radius:99px;font-weight:500;background:#F1EFE8;color:#444441}
-.b-pink{background:#FBEAF0;color:#72243E}.b-blue{background:#E6F1FB;color:#0C447C}.b-gray{background:#F1EFE8;color:#444441}
-#section-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px}
-.section-card{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:16px;cursor:pointer}
-.section-card:hover{border-color:var(--border2);box-shadow:0 2px 8px rgba(0,0,0,.06)}
-.section-card h3{font-size:14px;font-weight:500;margin:6px 0 3px}.section-card .meta{font-size:12px;color:var(--text2);margin-bottom:4px}.section-card .desc{font-size:11px;color:var(--text3);line-height:1.5}
-#global-results,#detail-view{display:none}
-.gr-section{margin-bottom:16px}.gr-section-title{margin-bottom:6px}
-.gr-row{padding:6px 10px;border-radius:var(--radius);cursor:pointer;font-size:13px;border:0.5px solid var(--border);background:var(--bg2);margin-bottom:4px;display:flex;gap:10px;align-items:flex-start}
-.gr-row code{font-size:12px;background:var(--bg);padding:1px 5px;border-radius:4px;border:0.5px solid var(--border);white-space:nowrap}
-.gr-desc{color:var(--text2);font-size:12px;line-height:1.5}
-#detail-header{margin-bottom:16px}#detail-header h2{font-size:16px;font-weight:600;margin:6px 0 4px}#detail-header .desc{font-size:13px;color:var(--text2)}
-.skill-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px}
-.skill-card{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius);padding:14px}
-.skill-card h4{font-size:13px;font-weight:600;margin-bottom:4px;font-family:monospace}
-.skill-card p{font-size:12px;color:var(--text2);margin-bottom:8px;line-height:1.5}
-.skill-meta{display:flex;align-items:center;gap:6px;margin-bottom:6px;flex-wrap:wrap}
-.skill-tag{display:inline-block;font-size:10px;padding:1px 6px;border-radius:99px;background:var(--bg);border:0.5px solid var(--border);color:var(--text2);margin:1px}
-.skill-rules{font-size:11px;color:var(--text3);list-style:none}.skill-rules li{padding:3px 0;border-bottom:0.5px solid var(--border)}
-.no-results{text-align:center;color:var(--text3);padding:40px 20px;font-size:13px}
-mark{background:#FFF3C4;color:inherit;border-radius:2px;padding:0 1px}
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --bg:#fff;--bg2:#f8f8f7;--border:#e8e7e3;--border2:#d3d0c8;
+    --text:#1a1a18;--text2:#6b6a66;--text3:#9a9894;
+    --radius:8px;--radius-lg:12px;
+    --font:'Inter',system-ui,-apple-system,sans-serif;
+  }
+  @media(prefers-color-scheme:dark){
+    :root{--bg:#1a1a1a;--bg2:#242424;--border:#333;--border2:#444;--text:#e8e8e6;--text2:#9a9894;--text3:#666}
+  }
+  body{font-family:var(--font);color:var(--text);background:var(--bg);padding:20px;min-height:100vh}
+  #top-bar{display:flex;align-items:center;gap:10px;margin-bottom:20px}
+  #back-btn{display:none;background:none;border:0.5px solid var(--border2);border-radius:var(--radius);padding:6px 12px;font-size:13px;color:var(--text2);cursor:pointer}
+  #back-btn:hover{border-color:var(--text3);color:var(--text)}
+  #title{font-size:15px;font-weight:600;color:var(--text)}
+  #search-bar{width:100%;padding:10px 14px;font-size:14px;border:0.5px solid var(--border);border-radius:var(--radius);background:var(--bg2);color:var(--text);outline:none;margin-bottom:12px}
+  #search-bar:focus{border-color:var(--border2);box-shadow:0 0 0 2px rgba(100,100,100,0.08)}
+  #count-label{font-size:12px;color:var(--text3);margin-bottom:14px}
+  .badge{display:inline-block;font-size:11px;padding:2px 8px;border-radius:99px;font-weight:500}
+  .b-purple{background:#EEEDFE;color:#3C3489}
+  .b-blue{background:#E6F1FB;color:#0C447C}
+  .b-teal{background:#E1F5EE;color:#085041}
+  .b-amber{background:#FAEEDA;color:#633806}
+  .b-coral{background:#FAECE7;color:#712B13}
+  .b-green{background:#EAF3DE;color:#27500A}
+  .b-gray{background:#F1EFE8;color:#444441}
+  .b-pink{background:#FBEAF0;color:#72243E}
+  .b-orange{background:#FEF0E6;color:#7A3010}
+  #section-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px}
+  .section-card{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:16px;cursor:pointer;transition:border-color .15s,box-shadow .15s}
+  .section-card:hover{border-color:var(--border2);box-shadow:0 2px 8px rgba(0,0,0,.06)}
+  .section-card h3{font-size:14px;font-weight:500;margin:6px 0 3px}
+  .section-card .meta{font-size:12px;color:var(--text2);margin-bottom:4px}
+  .section-card .desc{font-size:11px;color:var(--text3);line-height:1.5}
+  #global-results{display:none}
+  .gr-section{margin-bottom:16px}
+  .gr-section-title{margin-bottom:6px}
+  .gr-row{padding:6px 10px;border-radius:var(--radius);cursor:pointer;font-size:13px;border:0.5px solid var(--border);background:var(--bg2);margin-bottom:4px;display:flex;gap:10px;align-items:flex-start}
+  .gr-row:hover{border-color:var(--border2)}
+  .gr-row code{font-size:12px;background:var(--bg);padding:1px 5px;border-radius:4px;border:0.5px solid var(--border);white-space:nowrap}
+  .gr-desc{color:var(--text2);font-size:12px;line-height:1.5}
+  #detail-view{display:none}
+  #detail-header{margin-bottom:16px}
+  #detail-header h2{font-size:16px;font-weight:600;margin:6px 0 4px}
+  #detail-header .desc{font-size:13px;color:var(--text2)}
+  #local-search{width:100%;padding:8px 12px;font-size:13px;border:0.5px solid var(--border);border-radius:var(--radius);background:var(--bg2);color:var(--text);outline:none;margin-bottom:10px}
+  #local-search:focus{border-color:var(--border2)}
+  #detail-count{font-size:12px;color:var(--text3);margin-bottom:12px}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th{text-align:left;padding:8px 10px;font-size:11px;font-weight:600;color:var(--text2);border-bottom:1px solid var(--border);background:var(--bg2)}
+  td{padding:8px 10px;border-bottom:0.5px solid var(--border);vertical-align:top;line-height:1.5}
+  td:first-child{font-family:monospace;font-size:12px;white-space:nowrap}
+  tr:hover td{background:var(--bg2)}
+  .skill-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px}
+  .skill-card{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius);padding:14px}
+  .skill-card h4{font-size:13px;font-weight:600;margin-bottom:4px;font-family:monospace}
+  .skill-card p{font-size:12px;color:var(--text2);margin-bottom:8px;line-height:1.5}
+  .skill-rules{font-size:11px;color:var(--text3);list-style:none}
+  .skill-rules li{padding:3px 0;border-bottom:0.5px solid var(--border)}
+  .skill-rules li:last-child{border:none}
+  .skill-tag{display:inline-block;font-size:10px;padding:1px 6px;border-radius:99px;background:var(--bg);border:0.5px solid var(--border);color:var(--text2);margin:1px}
+  .skill-meta{display:flex;align-items:center;gap:6px;margin-bottom:6px}
+  mark{background:#FFF3C4;color:inherit;border-radius:2px;padding:0 1px}
+  .no-results{text-align:center;color:var(--text3);padding:40px 20px;font-size:13px}
+  .section-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--text3);margin-bottom:4px}
 </style>
 </head>
 <body>
-<div id="top-bar"><button id="back-btn" onclick="goBack()">← Back</button><span id="title">🗂️ Central Command</span></div>
+
+<div id="top-bar">
+  <button id="back-btn" onclick="goBack()">← Back</button>
+  <span id="title">🗂️ Tool & Command Library</span>
+</div>
+
 <input id="search-bar" placeholder="Search across all sections…" autocomplete="off">
-<div id="count-label">Loading skills…</div>
+<div id="count-label"></div>
+
+<!-- Home grid -->
 <div id="section-grid"></div>
 <div id="global-results"></div>
+
+<!-- Detail view -->
 <div id="detail-view">
   <div id="detail-header"></div>
   <input id="local-search" placeholder="Search within this section…" autocomplete="off">
@@ -53,102 +95,442 @@ mark{background:#FFF3C4;color:inherit;border-radius:2px;padding:0 1px}
 </div>
 
 <script>
-let currentSection = null;
-let SECTIONS = [];
-
-function esc(v){return String(v ?? '').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
-function hl(text,q){
-  const safe = esc(text);
-  if(!q) return safe;
-  const re = new RegExp('('+q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','gi');
-  return safe.replace(re,'<mark>$1</mark>');
-}
-function inferTags(text){
-  const s = text.toLowerCase();
-  const tags = [];
-  [['ads','ads'],['seo','seo'],['marketing','marketing'],['email','email'],['copy','copywriting'],['design','design'],['ui','ui'],['code','dev'],['github','github'],['data','data'],['analytics','analytics'],['sales','sales'],['research','research'],['agent','agents'],['cursor','cursor'],['claude','claude'],['codex','codex']].forEach(([k,t])=>{if(s.includes(k)&&!tags.includes(t))tags.push(t)});
-  return tags.length ? tags : ['skill'];
-}
-function inferCategory(text){
-  const s = text.toLowerCase();
-  if(/ad|seo|marketing|campaign|landing|cro|copy/.test(s)) return 'marketing';
-  if(/code|github|dev|api|test|repo|ci|deploy/.test(s)) return 'dev';
-  if(/design|ui|ux|figma/.test(s)) return 'design';
-  if(/data|analytics|sql|bigquery/.test(s)) return 'data';
-  if(/research|brief|reading/.test(s)) return 'research';
-  return 'general';
-}
-function normalizeSkill(raw){
-  const name = String(raw.name || raw.title || raw.slug || 'untitled-skill');
-  const desc = String(raw.description || raw.desc || raw.summary || 'No description provided.');
-  const source = String(raw.source || raw.path || raw.location || 'skills.json');
-  const lastModified = String(raw.lastModified || raw.updatedAt || raw.modified || '');
-  const tags = Array.isArray(raw.tags) ? raw.tags.map(String) : inferTags(name + ' ' + desc);
-  const category = String(raw.category || tags[0] || inferCategory(name + ' ' + desc));
-  const rules = [];
-  if(lastModified) rules.push('Last modified: ' + lastModified);
-  if(source) rules.push('Source: ' + source);
-  return {name,tags,category,desc,rules};
-}
-async function loadSkills(){
-  try{
-    const res = await fetch('skills.json?ts=' + Date.now(), {cache:'no-store'});
-    if(!res.ok) throw new Error('HTTP ' + res.status);
-    const data = await res.json();
-    const skills = Array.isArray(data) ? data : (Array.isArray(data.skills) ? data.skills : []);
-    SECTIONS = [{
-      id:'all-skills',
-      color:'b-pink',
-      badge:'Skills',
-      title:'All imported skills',
-      meta:`${skills.length} skills · loaded from skills.json`,
-      desc:'Complete generated inventory from your skills export.',
-      type:'skills',
-      skills:skills.map(normalizeSkill).sort((a,b)=>a.name.localeCompare(b.name))
-    }];
-    renderCards('');
-  }catch(e){
-    document.getElementById('count-label').textContent = 'Could not load skills.json. Make sure skills.json is in the repo root.';
+const SECTIONS = [
+  {
+    id:'factory-commands', color:'b-green', badge:'Claude Code',
+    title:'Software factory slash commands',
+    meta:'2 commands · ~/.claude/skills/',
+    desc:'Feature factory chain + build conventions — restart Claude Code to pick up',
+    type:'table',
+    columns:['Command','Purpose','Notes'],
+    rows:[
+      ['/feature-factory','Run the full 8-agent chain: research, story, spec, backend, frontend, tests, validate, PR review','3 human approval gates: after story, after brief, before PR. Backend-only or frontend-only supported.'],
+      ['/build-with-tests','Build conventions: read CLAUDE.md, match existing patterns, write tests alongside code, run typecheck+lint+tests at end','Use inside any build agent or directly for one-off feature work']
+    ]
+  },
+  {
+    id:'factory-agents', color:'b-green', badge:'Claude Code',
+    title:'Software factory agents',
+    meta:'9 agents · ~/.claude/agents/',
+    desc:'Specialized agents that do one job each. Chain them with /feature-factory or invoke individually.',
+    type:'skills',
+    skills:[
+      {name:'feature-orchestrator', tags:['factory','orchestration','agents','chain'], category:'devops',
+       desc:'Runs the full 8-agent chain end to end. Takes a feature idea, delegates to all agents in order, pauses for human approval at story, brief, and PR gate.',
+       rules:['Never skip the 3 human approval gates','backend-builder runs before frontend-builder','test-verifier runs after both builders','Loop back on critical validator findings before opening PR','Never edit code directly — always delegates to build agents']},
+      {name:'codebase-researcher', tags:['research','codebase','read-only','exploration'], category:'devops',
+       desc:'Read-only codebase investigator. Maps relevant files, patterns, similar features, and risks before any code is written. Uses haiku for cheap inspection.',
+       rules:['Never edit files','Never run state-changing commands','Output under 500 words','Cite every file path exactly','Ask one clarifying question if request is ambiguous']},
+      {name:'story-writer', tags:['story','requirements','acceptance-criteria','product'], category:'productivity',
+       desc:'Turns a rough feature idea into a user story with acceptance criteria, edge cases, and out-of-scope items. Read-only.',
+       rules:['Never invent business rules — surface as open questions instead','No code or data models — that is spec-writer job','One page max','No m-dashes in output']},
+      {name:'spec-writer', tags:['spec','technical-brief','architecture','planning'], category:'devops',
+       desc:'Turns an approved story into a technical brief: data model, flow, API, UI, tests, risks. Always reads CLAUDE.md first. Read-only.',
+       rules:['Read CLAUDE.md before writing','Prefer reusing existing infrastructure — call out any new dep explicitly','Always address tenant isolation and timezone, even to say not applicable','Never edit files']},
+      {name:'backend-builder', tags:['backend','api','services','tests','implementation'], category:'devops',
+       desc:'Implements the backend half of a feature: API routes, services, DB access, jobs, and unit tests. Reads brief and matches existing patterns.',
+       rules:['Only edit backend files — never React components or client hooks','Match existing patterns — reuse helpers instead of writing new ones','Write unit tests alongside production code','Run typecheck+lint+tests after — report failures','Stop and report if task requires violating a rule']},
+      {name:'frontend-builder', tags:['frontend','react','components','hooks','ui'], category:'devops',
+       desc:'Implements the frontend half: components, pages, hooks, client state, and component tests. Consumes API from backend-builder summary — never invents endpoints.',
+       rules:['Only edit frontend files — never services, routes, or migrations','Consume API exactly as backend-builder summary documents it','Match existing component patterns for style, a11y, loading, error states','Stop and report if backend summary is missing or shape is wrong']},
+      {name:'test-verifier', tags:['tests','acceptance','qa','verification'], category:'devops',
+       desc:'Writes acceptance tests against the user story after both builders finish. Covers every acceptance criterion. Edits test files only.',
+       rules:['Edit only test files — never production code','Cover every acceptance criterion from the story','Run tests after writing — report which criteria failed','Do not patch production code if tests fail — report for builders to fix']},
+      {name:'implementation-validator', tags:['validation','review','security','gaps'], category:'devops',
+       desc:'Compares implementation against story and brief. Reports Critical / Important / Minor findings. Never edits files.',
+       rules:['Never edit files','Cite file and line for every finding','Check: auth gaps, tenant isolation, secrets in logs, scope creep, missing tests','Mark opinion-based findings clearly','If clean, say so plainly — do not invent findings']},
+      {name:'pr-reviewer', tags:['pr','review','checklist','merge'], category:'devops',
+       desc:'Reviews a PR or diff against a consistent checklist. Reports Critical / Important / Minor findings. Never edits files or merges PRs.',
+       rules:['Never edit files or merge PRs','Check: scope, tests, auth, tenant isolation, secrets, architecture, docs','Cite file and line for every finding','Mark opinions clearly','Output BLOCK or APPROVE verdict']}
+    ]
+  },
+  {
+    id:"custom-commands", color:"b-purple", badge:"Claude Code",
+    title:"Your custom slash commands",
+    meta:"3 commands · ~/.claude/commands/",
+    desc:"Available in every Claude Code session",
+    type:"table",
+    columns:["Command","Purpose","Rules"],
+    rows:[
+      ["/commit-push-pr","Stage → conventional commit → push → draft PR via gh pr create --fill --draft","Never force push. Never commit to main. Draft only — merge manually."],
+      ["/verify","Full pre-PR loop: tests → typecheck → lint → browser check → smoke test","Task is NOT done until this passes. Always run before /commit-push-pr."],
+      ["/techdebt","Audit project for TODO/FIXME/dead code/hardcoded values/missing error handling","Do NOT fix. Do NOT touch files outside project dir."]
+    ]
+  },
+  {
+    id:"sujay-skills", color:"b-teal", badge:"Claude Code",
+    title:"Sujay skills",
+    meta:"12 skills · intent-routed",
+    desc:"~/.claude/skills/sujay-*/SKILL.md — loaded via AGENTS.md resolver",
+    type:"skills",
+    skills:[
+      {name:"sujay-autodev", tags:["automation","coding","git","ci"], category:"devops",
+       desc:"Autonomous development loop. No human input after goal is set. Plan → Execute → Verify → Commit until SUCCESS_CRITERIA met. Outputs AUTODEV_COMPLETE or AUTODEV_BLOCKED.",
+       rules:["Requires GOAL + SUCCESS_CRITERIA to start","Max 5 iterations — outputs AUTODEV_BLOCKED if stuck","Never output AUTODEV_COMPLETE without running the actual check","Never modify files outside SCOPE","Every changed line traces to GOAL"]},
+      {name:"sujay-writing", tags:["writing","email","cover-letter","docs"], category:"productivity",
+       desc:"Write anything — emails, cover letters, LinkedIn messages, docs. Enforces Sujay's voice and hard rules.",
+       rules:["No em-dashes — restructure instead","No unverified quantitative claims","Don't inject MultiDomain unless explicitly asked","Voice: direct, confident, professional but not formal","Never close with 'I look forward to hearing from you'"]},
+      {name:"sujay-outreach", tags:["outreach","networking","linkedin","email"], category:"productivity",
+       desc:"Cold outreach, customer discovery, LinkedIn connection requests, networking follow-ups, advisor/investor intros.",
+       rules:["Frame as NYU EE student unless specified otherwise","LinkedIn requests: under 300 characters","Don't pitch — ask to learn. Curiosity over selling.","Personalize first sentence to the specific person","Never mention MultiDomain/ACT unless explicitly asked"]},
+      {name:"sujay-code-review", tags:["code","review","debugging","security"], category:"devops",
+       desc:"Review code, debug an error, audit a PR, or assess for quality/security/architecture. Classifies findings as Critical / Warning / Suggestion.",
+       rules:["Read fully before commenting — understand intent first","Critical = breaks or security risk. Warning = edge cases. Suggestion = style.","Always check latent vs. deterministic boundary for AI/agent code","Every Critical finding must state: what breaks, under what condition, and the fix"]},
+      {name:"sujay-investigate", tags:["research","analysis","investigation","synthesis"], category:"research",
+       desc:"Research a topic, investigate a person/company/market, or answer a complex question requiring synthesis. Seven-step structured process with diarization.",
+       rules:["Step 4 (diarize) is most important — never skip","Flag inference vs. documented fact explicitly","Primary sources over aggregators always","Conclusion must directly answer QUESTION with confidence level stated"]},
+      {name:"sujay-product-spec", tags:["product","spec","prd","planning"], category:"productivity",
+       desc:"Write a product spec, feature brief, PRD, or technical design doc. Open Questions is the most important section.",
+       rules:["Never skip Open Questions","Must have at least one item in Open Questions to be complete","Keep it short enough an engineer reads it before writing code","For AI features: reference agent-architecture skill"]},
+      {name:"sujay-resume", tags:["resume","job-search","applications"], category:"productivity",
+       desc:"Generate, tailor, or improve a resume or job application. Hard rules always enforced.",
+       rules:["No em-dashes anywhere","No invented metrics or unverified claims","GKS section: 2-column table layout only","MultiDomain: software-only. No hardware assembly claims.","Full name: Sujay Sundar (never Venugopalan)","Every bullet: action verb + what + verifiable result"]},
+      {name:"sujay-agent-arch", tags:["ai","agents","architecture","llm","pipeline"], category:"devops",
+       desc:"Design, review, or debug AI agent systems, API integrations, or LLM-powered workflows. Enforces thin harness / fat skills pattern and latent vs. deterministic separation.",
+       rules:["Harness does exactly 4 things: run loop, read/write files, manage context, enforce safety","No god-tools — each tool does one thing fast","Judgment in skills (markdown), not harness code","Latent space: synthesis/judgment. Deterministic: math, SQL, sorting, optimization","API: claude-sonnet-4-6 executor + claude-opus-4-6 advisor via advisor_20260301"]},
+      {name:"sujay-enrich", tags:["research","enrichment","profiling","intelligence"], category:"research",
+       desc:"Enrich a profile or produce a structured intelligence brief from multiple sources. The Gap section (says vs. actually doing) is the most valuable output.",
+       rules:["Gap section is the signal — don't bury it","Gap must reference specific evidence from at least two different source types","No SQL or embedding search produces this — model must read and synthesize","Batch in parallel for multiple entities"]},
+      {name:"sujay-skill-meta", tags:["skills","meta","automation","codification"], category:"meta",
+       desc:"Create a new skill, improve an existing skill, or codify a recurring task. Rule: never do one-off work. If asked twice and no skill exists, that is a failure.",
+       rules:["Do manually first on 3-10 items, then codify","Skills go in ALL THREE: ~/.agents/skills/, ~/.claude/skills/, ~/.cursor/rules/","New skill must have: name, description, 3+ procedure steps, pitfalls, verification","Description field IS the resolver — match user intent precisely"]},
+      {name:"sujay-scaffold", tags:["scaffold","new-project","boilerplate"], category:"devops",
+       desc:"Start a new project with thin harness / fat skills architecture. Creates repo structure, AGENTS.md, stub skills, cursor rules, and README.",
+       rules:["Don't over-scaffold — start with 3-5 skills","AGENTS.md is pointers only, ~200 lines max","Harness should be embarrassingly simple — complexity belongs in skills"]},
+      {name:"sujay-karpathy", tags:["coding","guidelines","quality"], category:"devops",
+       desc:"Behavioral coding guidelines derived from Karpathy's observations. Always apply when writing, editing, or reviewing code.",
+       rules:["Think Before Coding: state assumptions, surface tradeoffs, ask if unclear","Simplicity First: minimum code, no speculative features, no single-use abstractions","Surgical Changes: touch only what you must, match existing style","Goal-Driven: transform tasks to verifiable goals with explicit verify steps"]}
+    ]
+  },
+  {
+    id:"gstack", color:"b-blue", badge:"gstack",
+    title:"gstack commands",
+    meta:"42 commands · full dev lifecycle",
+    desc:"~/.claude/skills/gstack/ — setup: cd ~/.claude/skills/gstack && ./setup",
+    type:"table",
+    columns:["Command","Stage","Purpose"],
+    rows:[
+      ["/autoplan","Planning","Auto-review pipeline: CEO, design, eng, DX reviews with 6 decision principles"],
+      ["/plan-ceo-review","Strategy","CEO/founder plan review: rethink problem, find 10-star product"],
+      ["/plan-eng-review","Architecture","Eng manager plan review: architecture, test strategy, execution"],
+      ["/plan-design-review","Design","Designer plan review: UI/UX gap analysis, interactive"],
+      ["/plan-devex-review","DX","Developer experience plan review: personas, friction, DX score"],
+      ["/plan-tune","Meta","Self-tuning question sensitivity and developer psychographic for gstack"],
+      ["/office-hours","Brainstorm","YC Office Hours: six forcing questions that expose weak premises"],
+      ["/design-consultation","Design","Design consultation: research landscape, propose direction"],
+      ["/design-html","Design","Generate production-quality HTML/CSS from design specs"],
+      ["/design-review","Design","Designer eye QA: spacing, hierarchy, visual inconsistency"],
+      ["/design-shotgun","Design","Generate multiple design variants, comparison board, iterate"],
+      ["/devex-review","DX","Live developer experience audit: uses browse to TEST the product"],
+      ["/review","Code review","Pre-landing review: SQL safety, race conditions, LLM trust boundaries"],
+      ["/ship","Shipping","Ship: merge base, tests, diff review, bump VERSION, deploy"],
+      ["/land-and-deploy","Shipping","Merge PR, wait for CI and deploy, smoke test, report"],
+      ["/canary","Shipping","Post-deploy canary monitoring: console errors, regressions"],
+      ["/qa","QA","Full QA pass: systematically test app and fix bugs found"],
+      ["/qa-only","QA","Report-only QA: test and report without making code changes"],
+      ["/document-release","Docs","Post-ship documentation update from release diff"],
+      ["/retro","Retro","Weekly engineering retrospective from commit history"],
+      ["/investigate","Debug","Systematic root cause: 4 phases (investigate, hypothesize, test, fix)"],
+      ["/codex","Second opinion","OpenAI Codex CLI: review, adversarial-review, or rescue modes"],
+      ["/cso","Security","Chief Security Officer audit: secrets, auth, dependency vulns"],
+      ["/careful","Safety","Safety guardrails: warns before rm -rf, DROP TABLE, etc."],
+      ["/freeze","Safety","Restrict file edits to a specific directory for the session"],
+      ["/guard","Safety","Full safety mode: destructive warnings + directory-scoped edits"],
+      ["/unfreeze","Safety","Clear freeze boundary, allow edits to all directories again"],
+      ["/benchmark","Performance","Performance regression detection: baseline + before/after, Core Web Vitals"],
+      ["/benchmark-models","Performance","Cross-model benchmark across Claude, GPT-4, Gemini"],
+      ["/health","Quality","Code quality dashboard: typecheck + lint + tests + dead code score"],
+      ["/browse","Browser","Fast headless browser: navigate, interact, screenshot, QA any URL"],
+      ["/open-gstack-browser","Browser","Launch AI-controlled Chromium with sidebar extension baked in"],
+      ["/connect-chrome","Browser","Connect to existing Chrome instance for browser automation"],
+      ["/setup-browser-cookies","Browser","Import auth cookies from real browser into headless session"],
+      ["/pair-agent","Remote","Pair a remote AI agent with your browser via setup key"],
+      ["/setup-deploy","Deploy","Configure deployment settings for /land-and-deploy"],
+      ["/setup-gbrain","Setup","Set up gbrain: install CLI, initialize knowledge base"],
+      ["/learn","Knowledge","Manage project learnings: review, search, prune, export"],
+      ["/make-pdf","Export","Turn markdown into publication-quality PDF with proper margins"],
+      ["/context-save","Context","Save working context: git state, decisions, remaining work"],
+      ["/context-restore","Context","Restore saved context from any branch or session"],
+      ["/gstack-upgrade","Meta","Upgrade gstack to latest. Detects global vs vendored install"]
+    ]
+  },
+  {
+    id:"codex", color:"b-amber", badge:"Codex",
+    title:"Codex integration",
+    meta:"3 commands · review gate",
+    desc:"Install: npm install -g @openai/codex",
+    type:"table",
+    columns:["Command","Purpose"],
+    rows:[
+      ["/codex:review","Standard code review"],
+      ["/codex:adversarial-review","Pressure-tests auth, data loss, race conditions"],
+      ["/codex:rescue","Hands task to Codex as subagent if Claude Code is stuck"]
+    ]
+  },
+  {
+    id:"codex-skills", color:"b-amber", badge:"Codex",
+    title:"Codex skills",
+    meta:"9 skills · context-mode system",
+    desc:"~/.claude/skills/codex-*/SKILL.md",
+    type:"table",
+    columns:["Skill","Purpose"],
+    rows:[
+      ["context-mode","Compresses large repos into vector-queryable snapshots. Pick up across sessions."],
+      ["context-save","Save current context to a named branch for later restore."],
+      ["context-restore","Restore saved context from any branch. Works across Conductor workspace handoffs."],
+      ["ctx-doctor","Run context-mode diagnostics: runtimes, hooks, FTS5, plugin registration, npm versions"],
+      ["ctx-stats","Show context window savings this session — token consumption, savings ratio, per-tool breakdown"],
+      ["ctx-purge","Permanently purge context-mode knowledge base. Destructive, cannot be undone."],
+      ["context-mode-ops","Parallel subagent army for issue triage, PR review, releases — orchestrates 10-20 agents"],
+      ["gemini","Cross-model second opinion from Gemini — review, challenge, or consult modes"],
+      ["health","Code quality dashboard: type check + lint + tests + dead code → weighted 0-10 score with trend tracking"],
+      ["design-shotgun","Generate multiple AI design variants, open comparison board, collect feedback, iterate"]
+    ]
+  },
+  {
+    id:"cc-plugins", color:"b-coral", badge:"Claude Code",
+    title:"Claude Code plugins",
+    meta:"20 plugins · installed",
+    desc:"Source: anthropics/claude-plugins-official — ~/.claude/plugins/cache/",
+    type:"table",
+    columns:["Plugin","Category","Version"],
+    rows:[
+      ["agent-sdk-dev","Dev workflow","0112c0e"],
+      ["claude-code-setup","Dev workflow","1.0.0"],
+      ["feature-dev","Dev workflow","0112c0e"],
+      ["code-review","Code quality","0112c0e"],
+      ["commit-commands","Dev workflow","0112c0e"],
+      ["code-simplifier","Code quality","1.0.0"],
+      ["claude-md-management","Dev workflow","1.0.0"],
+      ["php-lsp","LSP","1.0.0"],
+      ["firebase","Backend / infra","0112c0e"],
+      ["figma","Design","2.1.15"],
+      ["coderabbit","Code quality","1.1.0"],
+      ["github","Dev workflow","0112c0e"],
+      ["frontend-design","Frontend","0112c0e"],
+      ["typescript-lsp","LSP","1.0.0"],
+      ["vercel","Backend / infra","0.40.0"],
+      ["superpowers","Meta","5.0.7"],
+      ["stripe","Backend / infra","0.1.0"],
+      ["slack","Comms","1.0.0"],
+      ["supabase","Backend / infra","latest"],
+      ["linear","Project mgmt","latest"]
+    ]
+  },
+  {
+    id:"vercel-plugin", color:"b-green", badge:"Vercel",
+    title:"Vercel plugin",
+    meta:"25 skills · 3 agents · 5 commands",
+    desc:"~/.claude/plugins/cache/vercel/",
+    type:"table",
+    columns:["Item","Type","Detail"],
+    rows:[
+      ["deploy","Command","/deploy — build + deploy to production"],
+      ["preview","Command","/preview — deploy to preview URL"],
+      ["logs","Command","/logs — tail live function/build logs"],
+      ["env","Command","/env — manage environment variables"],
+      ["rollback","Command","/rollback — revert to previous deployment"],
+      ["deployment-agent","Agent","Monitors deployments, surfaces errors, triggers rollback"],
+      ["review-agent","Agent","PR preview deploy + comment with URL"],
+      ["monitor-agent","Agent","Watches error rates, alerts on anomalies"],
+      ["edge-functions","Skill","Write/deploy Vercel Edge Functions"],
+      ["serverless","Skill","Write/deploy serverless API routes"],
+      ["cron","Skill","Configure and debug cron jobs"],
+      ["middleware","Skill","Write Vercel middleware (request/response transforms)"],
+      ["kv","Skill","Vercel KV (Redis) read/write operations"],
+      ["blob","Skill","Vercel Blob storage uploads and retrieval"],
+      ["postgres","Skill","Vercel Postgres query and schema management"],
+      ["analytics","Skill","Read Web Analytics data, generate reports"],
+      ["speed-insights","Skill","Read Speed Insights, surface regressions"],
+      ["domains","Skill","Configure custom domains and DNS"],
+      ["firewall","Skill","Manage WAF rules and IP allowlists"],
+      ["flags","Skill","Feature flag CRUD via Edge Config"],
+      ["env-pull","Skill","Pull .env.local from Vercel project"],
+      ["team","Skill","Manage team members and permissions"],
+      ["usage","Skill","Query billing and usage dashboards"],
+      ["support","Skill","File support tickets and check status"],
+      ["project-settings","Skill","Read/write project-level settings"],
+      ["build-cache","Skill","Manage remote build cache"],
+      ["turbo","Skill","Turborepo remote caching setup and debug"],
+      ["zero-config","Skill","Framework detection and build override"]
+    ]
+  },
+  {
+    id:"cursor-skills", color:"b-pink", badge:"Cursor",
+    title:"Cursor skills",
+    meta:"11 skills · CLI + IDE",
+    desc:"~/.cursor/rules/ — loaded via Cursor Rules system",
+    type:"table",
+    columns:["Skill","Surface","Purpose"],
+    rows:[
+      ["babysit","CLI","Monitor long-running processes, restart on failure, surface errors"],
+      ["create-hook","CLI","Create Claude Code hooks (pre/post tool use) with correct schema"],
+      ["create-rule","IDE","Scaffold a new .cursor/rules/*.mdc rule from a description"],
+      ["create-skill","CLI + IDE","Create a new skill file in all three locations (agents/claude/cursor)"],
+      ["create-subagent","CLI","Spin up a subagent with defined SCOPE, GOAL, TOOLS, BUDGET"],
+      ["migrate-to-skills","CLI","Convert ad-hoc CLAUDE.md instructions into proper skill files"],
+      ["shell","CLI","Safe shell command runner with audit log and confirm prompts"],
+      ["split-to-prs","CLI","Split large diffs into atomic PRs by concern"],
+      ["statusline","IDE","Live status bar showing agent mode, context usage, active skill"],
+      ["update-cli-config","CLI","Update ~/.claude/settings.json safely with schema validation"],
+      ["update-cursor-settings","IDE","Update .cursor/settings.json or keybindings with validation"]
+    ]
+  },
+  {
+    id:"community-skill-repos", color:"b-orange", badge:"Community",
+    title:"Community skill repos",
+    meta:"6 repos · open-source",
+    desc:"Curated public skill repos for Claude Code and AI agents — install and extend your stack",
+    type:"skills",
+    skills:[
+      {name:"marketingskills", tags:["marketing","cro","seo","copywriting","email","growth"], category:"marketing",
+       desc:"40+ marketing skills by Corey Haines. Foundation is product-marketing-context which every other skill reads first. Covers CRO (page, signup, onboard, form, popup, paywall), SEO (audit, AI-SEO, programmatic, schema), copy (writing, editing, cold-email, email sequences, social, video, image), paid ads, analytics, A/B testing, churn prevention, referral programs, pricing, revops, sales enablement, competitor profiling, launch strategy, and marketing psychology.",
+       rules:["Install: npx skills add coreyhaines31/marketingskills","Or via Claude Code plugin: /plugin marketplace add coreyhaines31/marketingskills","Foundation skill product-marketing-context must exist before others activate","Skills cross-reference each other — copywriting <-> page-cro <-> ab-test-setup","Repo: github.com/coreyhaines31/marketingskills · 26.3k stars"]},
+      {name:"stop-slop", tags:["writing","prose","ai-tells","editing","quality"], category:"writing",
+       desc:"Single SKILL.md by Hardik Pandya that strips AI tells from prose. Catches banned phrases (throat-clearing openers, emphasis crutches, business jargon, adverbs), structural clichés (binary contrasts, dramatic fragmentation, false agency, narrator-from-a-distance), and sentence-level patterns (Wh- starters, em dashes, staccato fragmentation, lazy extremes). Scores output 1-10 across 5 dimensions: Directness, Rhythm, Trust, Authenticity, Density. Below 35/50 means revise.",
+       rules:["Install: copy SKILL.md into .claude/skills/ or upload to Claude Projects","No Wh- sentence starters","No em dashes — ever","Active voice required","No lazy extremes (never/always/everyone/nothing)","Repo: github.com/hardikpandya/stop-slop · 3k stars"]},
+      {name:"ui-ux-pro-max", tags:["ui","ux","design","frontend","figma","tailwind"], category:"design",
+       desc:"Design intelligence skill by nextlevelbuilder. v2.0 flagship feature: Design System Generator — analyzes project type and outputs full design system (pattern + style + colors + typography + effects + anti-patterns + checklist). Contains 67 UI styles, 161 industry-specific reasoning rules, 57 font pairings, 99 UX guidelines, 25 chart types, 15 tech stacks. Supports React, Next.js, Vue, Nuxt, Svelte, Astro, SwiftUI, Flutter, React Native, HTML+Tailwind, shadcn/ui.",
+       rules:["Install: npm install -g uipro-cli && uipro init --ai claude","Or via plugin: /plugin marketplace add nextlevelbuilder/ui-ux-pro-max-skill","Python 3.x required for design system search script","Generates design-system/MASTER.md + per-page overrides for hierarchical retrieval","Repo: github.com/nextlevelbuilder/ui-ux-pro-max-skill · 73.6k stars"]},
+      {name:"remotion-skills", tags:["video","remotion","animation","typescript","react"], category:"media",
+       desc:"Official agent skills package from the Remotion team (@remotion/skills). Provides Claude Code and AI agent context for programmatic video generation with Remotion — React-based video compositions, animations, and rendering pipelines. Internal package bundled with Remotion; auto-activates when working inside a Remotion project.",
+       rules:["Install: comes bundled with Remotion project install","Activates automatically for video composition and rendering tasks","TypeScript only — 100% TS codebase","Repo: github.com/remotion-dev/skills · 2.3k stars","No standalone install — use within a Remotion project context"]},
+      {name:"agent-skills-for-context-engineering", tags:["context","agents","llm","memory","multi-agent","architecture"], category:"ai-systems",
+       desc:"14 skills by Muratcan Koylan covering the full context engineering stack. Cited in Peking University academic research. Foundational: context-fundamentals, context-degradation, context-compression. Architectural: multi-agent-patterns, memory-systems, tool-design, filesystem-context, hosted-agents. Operational: context-optimization, latent-briefing, evaluation, advanced-evaluation. Methodology: project-development. Cognitive: bdi-mental-states (BDI ontology for deliberative reasoning).",
+       rules:["Install: /plugin marketplace add muratcankoylan/Agent-Skills-for-Context-Engineering","Or copy individual SKILL.md files into .claude/skills/","Progressive disclosure: load skill names first, full content only on activation","Platform-agnostic — works across Claude Code, Cursor, any agent platform","Repo: github.com/muratcankoylan/Agent-Skills-for-Context-Engineering · 15.4k stars"]},
+      {name:"garden-skills (web-design-engineer)", tags:["design","html","css","ui","frontend","oklch","typography"], category:"design",
+       desc:"Single skill by ConardLi that transforms AI-generated web pages from functional to stunning. Distilled from the Claude Design system prompt (~420 lines). Enforces a 6-step workflow: understand requirements → gather design context → declare design system in Markdown → show v0 draft early → full build → verify. Key mechanisms: anti-AI-cliché blocklist (bans purple-pink gradients, Inter/Roboto/Arial fonts, emoji icons, fake testimonials), oklch perceptually-uniform color derivation, 6 curated color+font pairings (Modern tech, Elegant editorial, Premium brand, Lively consumer, Minimal professional, Artisan warmth), placeholder philosophy for missing assets, and an advanced-patterns.md reference library of code templates. Covers web pages, landing pages, interactive prototypes, slide decks (1920x1080), data visualizations (Chart.js/D3), animations, and design systems.",
+       rules:["Install: copy .agents/skills/web-design-engineer/ into your project (or .claude/skills/ for Claude Code)","Declare design system in Markdown BEFORE writing any code — non-negotiable","Show v0 draft with placeholders first; let user course-correct before full build","Never use: Inter/Roboto/Arial/Fraunces/system-ui fonts, purple-pink gradients, emoji as icons, fabricated stats","Use oklch() for all color derivation — not HSL or raw hex","Verify step required: no console errors, no rogue hues, responsive checks","Repo: github.com/ConardLi/garden-skills · 1.2k stars"]}
+    ]
+  },
+  {
+    id:"mcp-connectors", color:"b-gray", badge:"Claude.ai",
+    title:"MCP connectors",
+    meta:"9 connectors · OAuth",
+    desc:"Connected at claude.ai — available in all conversations",
+    type:"table",
+    columns:["Connector","MCP URL","Use case"],
+    rows:[
+      ["Notion","mcp.notion.com/mcp","KB, databases, pages"],
+      ["Slack","mcp.slack.com/mcp","Messaging, channels"],
+      ["Gmail","gmailmcp.googleapis.com/mcp/v1","Email"],
+      ["Google Drive","drivemcp.googleapis.com/mcp/v1","Files and docs"],
+      ["Google Calendar","calendarmcp.googleapis.com/mcp/v1","Scheduling"],
+      ["Apollo.io","mcp.apollo.io/mcp","Lead enrichment, sequences"],
+      ["Canva","mcp.canva.com/mcp","Design assets"],
+      ["Digits","api.digits.com/mcp","Financials"],
+      ["Autodesk","developer.api.autodesk.com/knowledge/public/v1/mcp","Product help / docs"]
+    ]
+  },
+  {
+    id:"global-settings", color:"b-gray", badge:"Claude Code",
+    title:"Global settings & hooks",
+    meta:"Auto-approved bash · 2 hooks",
+    desc:"~/.claude/settings.json + settings.local.json",
+    type:"table",
+    columns:["Setting","Detail"],
+    rows:[
+      ["Auto: git","add, commit, push, pull, checkout, fetch, status, diff, log, stash, worktree, branch, merge, rebase"],
+      ["Auto: node","npm install, npx, pnpm, node, npm run, npm test"],
+      ["Auto: gh","gh pr create/view/list, gh issue, gh run"],
+      ["Auto: python","python, python3, pip install, uv run, uv tool install"],
+      ["Auto: shell","curl -s, cat, ls, mkdir, cp, mv, echo, grep, find"],
+      ["Auto: browser","browser-harness, Skill(browse), Skill(gstack)"],
+      ["Hook: PostToolUse","Auto-runs prettier --write on Write/Edit/MultiEdit"],
+      ["Hook: PreToolUse","Logs all bash to C:/Users/sujay/.claude/debug/tool-audit.log"],
+      ["Effort level","medium"]
+    ]
+  },
+  {
+    id:"claude-md", color:"b-gray", badge:"Global",
+    title:"CLAUDE.md behavioral rules",
+    meta:"Hard constraints + workflow rules",
+    desc:"~/.claude/CLAUDE.md — applies globally across all sessions",
+    type:"table",
+    columns:["Rule","Detail"],
+    rows:[
+      ["Browser","Use /browse for all web browsing. Never use mcp__claude-in-chrome__*"],
+      ["Dev stack","Cursor (orchestration) → Claude Code (execution) → Codex (review gate)"],
+      ["Plan first","Always plan before implementing. Plan mode before code."],
+      ["Verification","Run /verify before every commit. Non-negotiable."],
+      ["Subagents","Use for multi-file/multi-repo tasks"],
+      ["Git worktrees","Use for parallel work"],
+      ["Update CLAUDE.md","After any mid-session correction"],
+      ["Executor model","claude-sonnet-4-6"],
+      ["Advisor model","claude-opus-4-6 via advisor_20260301 tool"],
+      ["Beta header","anthropic-beta: advisor-tool-2026-03-01"],
+      ["No em-dashes","Never use em-dashes in writing output"],
+      ["MultiDomain scope","Software-only"],
+      ["GKS resume","2-column table layout only"],
+      ["Cover letters","No unverified metrics"],
+      ["MOSFET formula","Kn = (1/2)kn. ID = Kn(VGS - VTN)². No extra 1/2."],
+      ["Project Lizard","Socratic coaching only"]
+    ]
   }
+];
+
+let currentSection = null;
+
+function hl(text, q){
+  if(!q) return String(text);
+  const re = new RegExp('('+q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','gi');
+  return String(text).replace(re,'<mark>$1</mark>');
 }
-function matchesSkill(sk,q){
-  return sk.name.toLowerCase().includes(q) ||
-    sk.desc.toLowerCase().includes(q) ||
-    sk.category.toLowerCase().includes(q) ||
-    sk.tags.some(t=>String(t).toLowerCase().includes(q)) ||
-    sk.rules.some(r=>String(r).toLowerCase().includes(q));
-}
+
 function renderCards(filter=''){
-  const grid=document.getElementById('section-grid');
-  const globalResults=document.getElementById('global-results');
-  const countEl=document.getElementById('count-label');
+  const grid = document.getElementById('section-grid');
+  const globalResults = document.getElementById('global-results');
+  const countEl = document.getElementById('count-label');
   grid.innerHTML=''; globalResults.innerHTML='';
+
   if(!filter){
-    grid.style.display='grid'; globalResults.style.display='none';
-    countEl.textContent = SECTIONS.length ? SECTIONS[0].skills.length + ' skills loaded' : 'No skills loaded';
+    grid.style.display='grid';
+    globalResults.style.display='none';
+    countEl.textContent = SECTIONS.length + ' sections';
     SECTIONS.forEach(s=>{
-      const card=document.createElement('div');
-      card.className='section-card';
-      card.innerHTML=`<div><span class="badge ${s.color}">${esc(s.badge)}</span></div><h3>${esc(s.title)}</h3><div class="meta">${esc(s.meta)}</div><div class="desc">${esc(s.desc)}</div>`;
-      card.onclick=()=>openSection(s.id);
+      const card = document.createElement('div');
+      card.className = 'section-card';
+      card.innerHTML = `<div><span class="badge ${s.color}">${s.badge}</span></div><h3>${s.title}</h3><div class="meta">${s.meta}</div><div class="desc">${s.desc}</div>`;
+      card.onclick = ()=>openSection(s.id);
       grid.appendChild(card);
     });
     return;
   }
-  grid.style.display='none'; globalResults.style.display='block';
-  const q=filter.toLowerCase();
-  let html='', totalHits=0;
+
+  grid.style.display='none';
+  globalResults.style.display='block';
+  const q = filter.toLowerCase();
+  let totalHits = 0;
+  let html = '';
+
   SECTIONS.forEach(s=>{
-    const matched=s.skills.filter(sk=>matchesSkill(sk,q));
-    totalHits += matched.length;
-    html += `<div class="gr-section"><div class="gr-section-title"><span class="badge ${s.color}" onclick="openSection('${s.id}')">${esc(s.badge)}: ${esc(s.title)}</span></div>${matched.slice(0,100).map(sk=>`<div class="gr-row" onclick="openSection('${s.id}')"><code>${hl(sk.name,filter)}</code><span class="gr-desc">${hl(sk.desc,filter)}</span></div>`).join('')}</div>`;
+    let matchedRows = [];
+    if(s.type === 'skills'){
+      matchedRows = s.skills.filter(sk=>
+        sk.name.toLowerCase().includes(q)||
+        sk.desc.toLowerCase().includes(q)||
+        sk.tags.some(t=>t.includes(q))||
+        sk.rules.some(r=>r.toLowerCase().includes(q))
+      ).map(sk=>[sk.name, sk.desc]);
+    } else {
+      matchedRows = s.rows.filter(r=>r.some(c=>String(c).toLowerCase().includes(q)));
+    }
+    const titleMatch = s.title.toLowerCase().includes(q) || s.desc.toLowerCase().includes(q);
+    if(!matchedRows.length && !titleMatch) return;
+    totalHits += matchedRows.length;
+    html += `<div class="gr-section">
+      <div class="gr-section-title"><span class="badge ${s.color}" style="cursor:pointer" onclick="openSection('${s.id}')">${s.badge}: ${s.title}</span></div>
+      ${matchedRows.map(r=>`<div class="gr-row" onclick="openSection('${s.id}')"><code>${hl(r[0],filter)}</code><span class="gr-desc">${hl(r.slice(1).join(' · '),filter)}</span></div>`).join('')}
+    </div>`;
   });
-  countEl.textContent = totalHits ? `${totalHits} results` : '';
-  globalResults.innerHTML = totalHits ? html : `<div class="no-results">No results for "${esc(filter)}"</div>`;
+
+  countEl.textContent = totalHits ? `${totalHits} result${totalHits!==1?'s':''} across ${SECTIONS.length} sections` : '';
+  globalResults.innerHTML = html || '<div class="no-results">No results for "'+filter+'"</div>';
 }
+
 function openSection(id){
-  currentSection=id;
-  const s=SECTIONS.find(x=>x.id===id);
+  currentSection = id;
+  const s = SECTIONS.find(x=>x.id===id);
   document.getElementById('section-grid').style.display='none';
   document.getElementById('global-results').style.display='none';
   document.getElementById('detail-view').style.display='block';
@@ -156,20 +538,52 @@ function openSection(id){
   document.getElementById('search-bar').value='';
   document.getElementById('local-search').value='';
   document.getElementById('count-label').textContent='';
-  document.getElementById('detail-header').innerHTML=`<div><span class="badge ${s.color}">${esc(s.badge)}</span></div><h2>${esc(s.title)}</h2><div class="desc">${esc(s.meta)} · ${esc(s.desc)}</div>`;
-  renderDetail(s,'');
+
+  document.getElementById('detail-header').innerHTML = `
+    <div><span class="badge ${s.color}">${s.badge}</span></div>
+    <h2>${s.title}</h2>
+    <div class="desc">${s.meta} · ${s.desc}</div>
+  `;
+  renderDetail(s, '');
 }
-function renderDetail(s,filter=''){
-  const content=document.getElementById('detail-content');
-  const countEl=document.getElementById('detail-count');
-  const q=filter.toLowerCase();
-  const items = filter ? s.skills.filter(sk=>matchesSkill(sk,q)) : s.skills;
-  countEl.textContent = filter ? `${items.length} of ${s.skills.length} skills` : `${s.skills.length} skills`;
-  if(!items.length){content.innerHTML=`<div class="no-results">No results for "${esc(filter)}"</div>`;return;}
-  content.innerHTML=`<div class="skill-grid">${items.map(sk=>`<div class="skill-card"><div class="skill-meta"><h4>${hl(sk.name,filter)}</h4><span class="badge b-gray">${esc(sk.category)}</span></div><p>${hl(sk.desc,filter)}</p><ul class="skill-rules">${sk.rules.map(r=>`<li>${hl(r,filter)}</li>`).join('')}</ul><div style="margin-top:8px">${sk.tags.map(t=>`<span class="skill-tag">${esc(t)}</span>`).join('')}</div></div>`).join('')}</div>`;
+
+function renderDetail(s, filter=''){
+  const content = document.getElementById('detail-content');
+  const countEl = document.getElementById('detail-count');
+  const q = filter.toLowerCase();
+
+  if(s.type === 'skills'){
+    const items = filter ? s.skills.filter(sk=>
+      sk.name.toLowerCase().includes(q)||
+      sk.desc.toLowerCase().includes(q)||
+      sk.tags.some(t=>t.includes(q))||
+      sk.rules.some(r=>r.toLowerCase().includes(q))
+    ) : s.skills;
+    countEl.textContent = filter ? `${items.length} of ${s.skills.length} skills` : `${s.skills.length} skills`;
+    if(!items.length){ content.innerHTML='<div class="no-results">No results for "'+filter+'"</div>'; return; }
+    content.innerHTML = `<div class="skill-grid">${items.map(sk=>`
+      <div class="skill-card">
+        <div class="skill-meta">
+          <h4>${hl(sk.name,filter)}</h4>
+          <span class="badge b-gray">${sk.category}</span>
+        </div>
+        <p>${hl(sk.desc,filter)}</p>
+        <div class="section-label">Install &amp; Notes</div>
+        <ul class="skill-rules">${sk.rules.map(r=>`<li>${hl(r,filter)}</li>`).join('')}</ul>
+        <div style="margin-top:8px">${sk.tags.map(t=>`<span class="skill-tag">${t}</span>`).join('')}</div>
+      </div>`).join('')}
+    </div>`;
+  } else {
+    const items = filter ? s.rows.filter(r=>r.some(c=>String(c).toLowerCase().includes(q))) : s.rows;
+    countEl.textContent = filter ? `${items.length} of ${s.rows.length} rows` : `${s.rows.length} rows`;
+    if(!items.length){ content.innerHTML='<div class="no-results">No results for "'+filter+'"</div>'; return; }
+    content.innerHTML = '<table><thead><tr>'+s.columns.map(c=>`<th>${c}</th>`).join('')+'</tr></thead><tbody>'+
+      items.map(r=>'<tr>'+r.map(c=>`<td>${hl(c,filter)}</td>`).join('')+'</tr>').join('')+'</tbody></table>';
+  }
 }
+
 function goBack(){
-  currentSection=null;
+  currentSection = null;
   document.getElementById('section-grid').style.display='grid';
   document.getElementById('global-results').style.display='none';
   document.getElementById('detail-view').style.display='none';
@@ -178,9 +592,18 @@ function goBack(){
   document.getElementById('local-search').value='';
   renderCards('');
 }
-document.getElementById('search-bar').addEventListener('input',e=>{if(currentSection)goBack();renderCards(e.target.value.trim());});
-document.getElementById('local-search').addEventListener('input',e=>{if(!currentSection)return;const s=SECTIONS.find(x=>x.id===currentSection);renderDetail(s,e.target.value.trim());});
-loadSkills();
+
+document.getElementById('search-bar').addEventListener('input', e=>{
+  if(currentSection) goBack();
+  renderCards(e.target.value.trim());
+});
+document.getElementById('local-search').addEventListener('input', e=>{
+  if(!currentSection) return;
+  const s = SECTIONS.find(x=>x.id===currentSection);
+  renderDetail(s, e.target.value.trim());
+});
+
+renderCards('');
 </script>
 </body>
 </html>
