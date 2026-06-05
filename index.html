@@ -75,11 +75,11 @@
 <body>
 
 <div id="top-bar">
-  <button id="back-btn" onclick="goBack()">â† Back</button>
-  <span id="title">ðŸ—‚ï¸ Tool & Command Library</span>
+  <button id="back-btn" onclick="goBack()">← Back</button>
+  <span id="title">Tool & Command Library</span>
 </div>
 
-<input id="search-bar" placeholder="Search across all sectionsâ€¦" autocomplete="off">
+<input id="search-bar" placeholder="Search across all sections..." autocomplete="off">
 <div id="count-label"></div>
 
 <!-- Home grid -->
@@ -89,7 +89,7 @@
 <!-- Detail view -->
 <div id="detail-view">
   <div id="detail-header"></div>
-  <input id="local-search" placeholder="Search within this sectionâ€¦" autocomplete="off">
+  <input id="local-search" placeholder="Search within this section..." autocomplete="off">
   <div id="detail-count"></div>
   <div id="detail-content"></div>
 </div>
@@ -99,8 +99,8 @@ window.SECTIONS = [
   {
     id:'factory-commands', color:'b-green', badge:'Claude Code',
     title:'Software factory slash commands',
-    meta:'2 commands Â· ~/.claude/skills/',
-    desc:'Feature factory chain + build conventions â€” restart Claude Code to pick up',
+    meta:'2 commands · ~/.claude/skills/',
+    desc:'Feature factory chain + build conventions - restart Claude Code to pick up',
     type:'table',
     columns:['Command','Purpose','Notes'],
     rows:[
@@ -111,34 +111,34 @@ window.SECTIONS = [
   {
     id:'factory-agents', color:'b-green', badge:'Claude Code',
     title:'Software factory agents',
-    meta:'9 agents Â· ~/.claude/agents/',
+    meta:'9 agents · ~/.claude/agents/',
     desc:'Specialized agents that do one job each. Chain them with /feature-factory or invoke individually.',
     type:'skills',
     skills:[
       {name:'feature-orchestrator', tags:['factory','orchestration','agents','chain'], category:'devops',
        desc:'Runs the full 8-agent chain end to end. Takes a feature idea, delegates to all agents in order, pauses for human approval at story, brief, and PR gate.',
-       rules:['Never skip the 3 human approval gates','backend-builder runs before frontend-builder','test-verifier runs after both builders','Loop back on critical validator findings before opening PR','Never edit code directly â€” always delegates to build agents']},
+       rules:['Never skip the 3 human approval gates','backend-builder runs before frontend-builder','test-verifier runs after both builders','Loop back on critical validator findings before opening PR','Never edit code directly - always delegates to build agents']},
       {name:'codebase-researcher', tags:['research','codebase','read-only','exploration'], category:'devops',
        desc:'Read-only codebase investigator. Maps relevant files, patterns, similar features, and risks before any code is written. Uses haiku for cheap inspection.',
        rules:['Never edit files','Never run state-changing commands','Output under 500 words','Cite every file path exactly','Ask one clarifying question if request is ambiguous']},
       {name:'story-writer', tags:['story','requirements','acceptance-criteria','product'], category:'productivity',
        desc:'Turns a rough feature idea into a user story with acceptance criteria, edge cases, and out-of-scope items. Read-only.',
-       rules:['Never invent business rules â€” surface as open questions instead','No code or data models â€” that is spec-writer job','One page max','No m-dashes in output']},
+       rules:['Never invent business rules - surface as open questions instead','No code or data models - that is spec-writer job','One page max','No m-dashes in output']},
       {name:'spec-writer', tags:['spec','technical-brief','architecture','planning'], category:'devops',
        desc:'Turns an approved story into a technical brief: data model, flow, API, UI, tests, risks. Always reads CLAUDE.md first. Read-only.',
-       rules:['Read CLAUDE.md before writing','Prefer reusing existing infrastructure â€” call out any new dep explicitly','Always address tenant isolation and timezone, even to say not applicable','Never edit files']},
+       rules:['Read CLAUDE.md before writing','Prefer reusing existing infrastructure - call out any new dep explicitly','Always address tenant isolation and timezone, even to say not applicable','Never edit files']},
       {name:'backend-builder', tags:['backend','api','services','tests','implementation'], category:'devops',
        desc:'Implements the backend half of a feature: API routes, services, DB access, jobs, and unit tests. Reads brief and matches existing patterns.',
-       rules:['Only edit backend files â€” never React components or client hooks','Match existing patterns â€” reuse helpers instead of writing new ones','Write unit tests alongside production code','Run typecheck+lint+tests after â€” report failures','Stop and report if task requires violating a rule']},
+       rules:['Only edit backend files - never React components or client hooks','Match existing patterns - reuse helpers instead of writing new ones','Write unit tests alongside production code','Run typecheck+lint+tests after - report failures','Stop and report if task requires violating a rule']},
       {name:'frontend-builder', tags:['frontend','react','components','hooks','ui'], category:'devops',
-       desc:'Implements the frontend half: components, pages, hooks, client state, and component tests. Consumes API from backend-builder summary â€” never invents endpoints.',
-       rules:['Only edit frontend files â€” never services, routes, or migrations','Consume API exactly as backend-builder summary documents it','Match existing component patterns for style, a11y, loading, error states','Stop and report if backend summary is missing or shape is wrong']},
+       desc:'Implements the frontend half: components, pages, hooks, client state, and component tests. Consumes API from backend-builder summary - never invents endpoints.',
+       rules:['Only edit frontend files - never services, routes, or migrations','Consume API exactly as backend-builder summary documents it','Match existing component patterns for style, a11y, loading, error states','Stop and report if backend summary is missing or shape is wrong']},
       {name:'test-verifier', tags:['tests','acceptance','qa','verification'], category:'devops',
        desc:'Writes acceptance tests against the user story after both builders finish. Covers every acceptance criterion. Edits test files only.',
-       rules:['Edit only test files â€” never production code','Cover every acceptance criterion from the story','Run tests after writing â€” report which criteria failed','Do not patch production code if tests fail â€” report for builders to fix']},
+       rules:['Edit only test files - never production code','Cover every acceptance criterion from the story','Run tests after writing - report which criteria failed','Do not patch production code if tests fail - report for builders to fix']},
       {name:'implementation-validator', tags:['validation','review','security','gaps'], category:'devops',
        desc:'Compares implementation against story and brief. Reports Critical / Important / Minor findings. Never edits files.',
-       rules:['Never edit files','Cite file and line for every finding','Check: auth gaps, tenant isolation, secrets in logs, scope creep, missing tests','Mark opinion-based findings clearly','If clean, say so plainly â€” do not invent findings']},
+       rules:['Never edit files','Cite file and line for every finding','Check: auth gaps, tenant isolation, secrets in logs, scope creep, missing tests','Mark opinion-based findings clearly','If clean, say so plainly - do not invent findings']},
       {name:'pr-reviewer', tags:['pr','review','checklist','merge'], category:'devops',
        desc:'Reviews a PR or diff against a consistent checklist. Reports Critical / Important / Minor findings. Never edits files or merges PRs.',
        rules:['Never edit files or merge PRs','Check: scope, tests, auth, tenant isolation, secrets, architecture, docs','Cite file and line for every finding','Mark opinions clearly','Output BLOCK or APPROVE verdict']}
@@ -147,38 +147,38 @@ window.SECTIONS = [
   {
     id:"custom-commands", color:"b-purple", badge:"Claude Code",
     title:"Your custom slash commands",
-    meta:"3 commands Â· ~/.claude/commands/",
+    meta:"3 commands · ~/.claude/commands/",
     desc:"Available in every Claude Code session",
     type:"table",
     columns:["Command","Purpose","Rules"],
     rows:[
-      ["/commit-push-pr","Stage â†’ conventional commit â†’ push â†’ draft PR via gh pr create --fill --draft","Never force push. Never commit to main. Draft only â€” merge manually."],
-      ["/verify","Full pre-PR loop: tests â†’ typecheck â†’ lint â†’ browser check â†’ smoke test","Task is NOT done until this passes. Always run before /commit-push-pr."],
+      ["/commit-push-pr","Stage ←’ conventional commit ←’ push ←’ draft PR via gh pr create --fill --draft","Never force push. Never commit to main. Draft only - merge manually."],
+      ["/verify","Full pre-PR loop: tests ←’ typecheck ←’ lint ←’ browser check ←’ smoke test","Task is NOT done until this passes. Always run before /commit-push-pr."],
       ["/techdebt","Audit project for TODO/FIXME/dead code/hardcoded values/missing error handling","Do NOT fix. Do NOT touch files outside project dir."]
     ]
   },
   {
     id:"sujay-skills", color:"b-teal", badge:"Claude Code",
     title:"Sujay skills",
-    meta:"12 skills Â· intent-routed",
-    desc:"~/.claude/skills/sujay-*/SKILL.md â€” loaded via AGENTS.md resolver",
+    meta:"12 skills · intent-routed",
+    desc:"~/.claude/skills/sujay-*/SKILL.md - loaded via AGENTS.md resolver",
     type:"skills",
     skills:[
       {name:"sujay-autodev", tags:["automation","coding","git","ci"], category:"devops",
-       desc:"Autonomous development loop. No human input after goal is set. Plan â†’ Execute â†’ Verify â†’ Commit until SUCCESS_CRITERIA met. Outputs AUTODEV_COMPLETE or AUTODEV_BLOCKED.",
-       rules:["Requires GOAL + SUCCESS_CRITERIA to start","Max 5 iterations â€” outputs AUTODEV_BLOCKED if stuck","Never output AUTODEV_COMPLETE without running the actual check","Never modify files outside SCOPE","Every changed line traces to GOAL"]},
+       desc:"Autonomous development loop. No human input after goal is set. Plan ←’ Execute ←’ Verify ←’ Commit until SUCCESS_CRITERIA met. Outputs AUTODEV_COMPLETE or AUTODEV_BLOCKED.",
+       rules:["Requires GOAL + SUCCESS_CRITERIA to start","Max 5 iterations - outputs AUTODEV_BLOCKED if stuck","Never output AUTODEV_COMPLETE without running the actual check","Never modify files outside SCOPE","Every changed line traces to GOAL"]},
       {name:"sujay-writing", tags:["writing","email","cover-letter","docs"], category:"productivity",
-       desc:"Write anything â€” emails, cover letters, LinkedIn messages, docs. Enforces Sujay's voice and hard rules.",
-       rules:["No em-dashes â€” restructure instead","No unverified quantitative claims","Don't inject MultiDomain unless explicitly asked","Voice: direct, confident, professional but not formal","Never close with 'I look forward to hearing from you'"]},
+       desc:"Write anything - emails, cover letters, LinkedIn messages, docs. Enforces Sujay's voice and hard rules.",
+       rules:["No em-dashes - restructure instead","No unverified quantitative claims","Don't inject MultiDomain unless explicitly asked","Voice: direct, confident, professional but not formal","Never close with 'I look forward to hearing from you'"]},
       {name:"sujay-outreach", tags:["outreach","networking","linkedin","email"], category:"productivity",
        desc:"Cold outreach, customer discovery, LinkedIn connection requests, networking follow-ups, advisor/investor intros.",
-       rules:["Frame as NYU EE student unless specified otherwise","LinkedIn requests: under 300 characters","Don't pitch â€” ask to learn. Curiosity over selling.","Personalize first sentence to the specific person","Never mention MultiDomain/ACT unless explicitly asked"]},
+       rules:["Frame as NYU EE student unless specified otherwise","LinkedIn requests: under 300 characters","Don't pitch - ask to learn. Curiosity over selling.","Personalize first sentence to the specific person","Never mention MultiDomain/ACT unless explicitly asked"]},
       {name:"sujay-code-review", tags:["code","review","debugging","security"], category:"devops",
        desc:"Review code, debug an error, audit a PR, or assess for quality/security/architecture. Classifies findings as Critical / Warning / Suggestion.",
-       rules:["Read fully before commenting â€” understand intent first","Critical = breaks or security risk. Warning = edge cases. Suggestion = style.","Always check latent vs. deterministic boundary for AI/agent code","Every Critical finding must state: what breaks, under what condition, and the fix"]},
+       rules:["Read fully before commenting - understand intent first","Critical = breaks or security risk. Warning = edge cases. Suggestion = style.","Always check latent vs. deterministic boundary for AI/agent code","Every Critical finding must state: what breaks, under what condition, and the fix"]},
       {name:"sujay-investigate", tags:["research","analysis","investigation","synthesis"], category:"research",
        desc:"Research a topic, investigate a person/company/market, or answer a complex question requiring synthesis. Seven-step structured process with diarization.",
-       rules:["Step 4 (diarize) is most important â€” never skip","Flag inference vs. documented fact explicitly","Primary sources over aggregators always","Conclusion must directly answer QUESTION with confidence level stated"]},
+       rules:["Step 4 (diarize) is most important - never skip","Flag inference vs. documented fact explicitly","Primary sources over aggregators always","Conclusion must directly answer QUESTION with confidence level stated"]},
       {name:"sujay-product-spec", tags:["product","spec","prd","planning"], category:"productivity",
        desc:"Write a product spec, feature brief, PRD, or technical design doc. Open Questions is the most important section.",
        rules:["Never skip Open Questions","Must have at least one item in Open Questions to be complete","Keep it short enough an engineer reads it before writing code","For AI features: reference agent-architecture skill"]},
@@ -187,16 +187,16 @@ window.SECTIONS = [
        rules:["No em-dashes anywhere","No invented metrics or unverified claims","GKS section: 2-column table layout only","MultiDomain: software-only. No hardware assembly claims.","Full name: Sujay Sundar (never Venugopalan)","Every bullet: action verb + what + verifiable result"]},
       {name:"sujay-agent-arch", tags:["ai","agents","architecture","llm","pipeline"], category:"devops",
        desc:"Design, review, or debug AI agent systems, API integrations, or LLM-powered workflows. Enforces thin harness / fat skills pattern and latent vs. deterministic separation.",
-       rules:["Harness does exactly 4 things: run loop, read/write files, manage context, enforce safety","No god-tools â€” each tool does one thing fast","Judgment in skills (markdown), not harness code","Latent space: synthesis/judgment. Deterministic: math, SQL, sorting, optimization","API: claude-sonnet-4-6 executor + claude-opus-4-6 advisor via advisor_20260301"]},
+       rules:["Harness does exactly 4 things: run loop, read/write files, manage context, enforce safety","No god-tools - each tool does one thing fast","Judgment in skills (markdown), not harness code","Latent space: synthesis/judgment. Deterministic: math, SQL, sorting, optimization","API: claude-sonnet-4-6 executor + claude-opus-4-6 advisor via advisor_20260301"]},
       {name:"sujay-enrich", tags:["research","enrichment","profiling","intelligence"], category:"research",
        desc:"Enrich a profile or produce a structured intelligence brief from multiple sources. The Gap section (says vs. actually doing) is the most valuable output.",
-       rules:["Gap section is the signal â€” don't bury it","Gap must reference specific evidence from at least two different source types","No SQL or embedding search produces this â€” model must read and synthesize","Batch in parallel for multiple entities"]},
+       rules:["Gap section is the signal - don't bury it","Gap must reference specific evidence from at least two different source types","No SQL or embedding search produces this - model must read and synthesize","Batch in parallel for multiple entities"]},
       {name:"sujay-skill-meta", tags:["skills","meta","automation","codification"], category:"meta",
        desc:"Create a new skill, improve an existing skill, or codify a recurring task. Rule: never do one-off work. If asked twice and no skill exists, that is a failure.",
-       rules:["Do manually first on 3-10 items, then codify","Skills go in ALL THREE: ~/.agents/skills/, ~/.claude/skills/, ~/.cursor/rules/","New skill must have: name, description, 3+ procedure steps, pitfalls, verification","Description field IS the resolver â€” match user intent precisely"]},
+       rules:["Do manually first on 3-10 items, then codify","Skills go in ALL THREE: ~/.agents/skills/, ~/.claude/skills/, ~/.cursor/rules/","New skill must have: name, description, 3+ procedure steps, pitfalls, verification","Description field IS the resolver - match user intent precisely"]},
       {name:"sujay-scaffold", tags:["scaffold","new-project","boilerplate"], category:"devops",
        desc:"Start a new project with thin harness / fat skills architecture. Creates repo structure, AGENTS.md, stub skills, cursor rules, and README.",
-       rules:["Don't over-scaffold â€” start with 3-5 skills","AGENTS.md is pointers only, ~200 lines max","Harness should be embarrassingly simple â€” complexity belongs in skills"]},
+       rules:["Don't over-scaffold - start with 3-5 skills","AGENTS.md is pointers only, ~200 lines max","Harness should be embarrassingly simple - complexity belongs in skills"]},
       {name:"sujay-karpathy", tags:["coding","guidelines","quality"], category:"devops",
        desc:"Behavioral coding guidelines derived from Karpathy's observations. Always apply when writing, editing, or reviewing code.",
        rules:["Think Before Coding: state assumptions, surface tradeoffs, ask if unclear","Simplicity First: minimum code, no speculative features, no single-use abstractions","Surgical Changes: touch only what you must, match existing style","Goal-Driven: transform tasks to verifiable goals with explicit verify steps"]}
@@ -205,8 +205,8 @@ window.SECTIONS = [
   {
     id:"gstack", color:"b-blue", badge:"gstack",
     title:"gstack commands",
-    meta:"42 commands Â· full dev lifecycle",
-    desc:"~/.claude/skills/gstack/ â€” setup: cd ~/.claude/skills/gstack && ./setup",
+    meta:"42 commands · full dev lifecycle",
+    desc:"~/.claude/skills/gstack/ - setup: cd ~/.claude/skills/gstack && ./setup",
     type:"table",
     columns:["Command","Stage","Purpose"],
     rows:[
@@ -257,7 +257,7 @@ window.SECTIONS = [
   {
     id:"codex", color:"b-amber", badge:"Codex",
     title:"Codex integration",
-    meta:"3 commands Â· review gate",
+    meta:"3 commands · review gate",
     desc:"Install: npm install -g @openai/codex",
     type:"table",
     columns:["Command","Purpose"],
@@ -270,7 +270,7 @@ window.SECTIONS = [
   {
     id:"codex-skills", color:"b-amber", badge:"Codex",
     title:"Codex skills",
-    meta:"9 skills Â· context-mode system",
+    meta:"9 skills · context-mode system",
     desc:"~/.claude/skills/codex-*/SKILL.md",
     type:"table",
     columns:["Skill","Purpose"],
@@ -279,19 +279,19 @@ window.SECTIONS = [
       ["context-save","Save current context to a named branch for later restore."],
       ["context-restore","Restore saved context from any branch. Works across Conductor workspace handoffs."],
       ["ctx-doctor","Run context-mode diagnostics: runtimes, hooks, FTS5, plugin registration, npm versions"],
-      ["ctx-stats","Show context window savings this session â€” token consumption, savings ratio, per-tool breakdown"],
+      ["ctx-stats","Show context window savings this session - token consumption, savings ratio, per-tool breakdown"],
       ["ctx-purge","Permanently purge context-mode knowledge base. Destructive, cannot be undone."],
-      ["context-mode-ops","Parallel subagent army for issue triage, PR review, releases â€” orchestrates 10-20 agents"],
-      ["gemini","Cross-model second opinion from Gemini â€” review, challenge, or consult modes"],
-      ["health","Code quality dashboard: type check + lint + tests + dead code â†’ weighted 0-10 score with trend tracking"],
+      ["context-mode-ops","Parallel subagent army for issue triage, PR review, releases - orchestrates 10-20 agents"],
+      ["gemini","Cross-model second opinion from Gemini - review, challenge, or consult modes"],
+      ["health","Code quality dashboard: type check + lint + tests + dead code ←’ weighted 0-10 score with trend tracking"],
       ["design-shotgun","Generate multiple AI design variants, open comparison board, collect feedback, iterate"]
     ]
   },
   {
     id:"cc-plugins", color:"b-coral", badge:"Claude Code",
     title:"Claude Code plugins",
-    meta:"20 plugins Â· installed",
-    desc:"Source: anthropics/claude-plugins-official â€” ~/.claude/plugins/cache/",
+    meta:"20 plugins · installed",
+    desc:"Source: anthropics/claude-plugins-official - ~/.claude/plugins/cache/",
     type:"table",
     columns:["Plugin","Category","Version"],
     rows:[
@@ -320,16 +320,16 @@ window.SECTIONS = [
   {
     id:"vercel-plugin", color:"b-green", badge:"Vercel",
     title:"Vercel plugin",
-    meta:"25 skills Â· 3 agents Â· 5 commands",
+    meta:"25 skills · 3 agents · 5 commands",
     desc:"~/.claude/plugins/cache/vercel/",
     type:"table",
     columns:["Item","Type","Detail"],
     rows:[
-      ["deploy","Command","/deploy â€” build + deploy to production"],
-      ["preview","Command","/preview â€” deploy to preview URL"],
-      ["logs","Command","/logs â€” tail live function/build logs"],
-      ["env","Command","/env â€” manage environment variables"],
-      ["rollback","Command","/rollback â€” revert to previous deployment"],
+      ["deploy","Command","/deploy - build + deploy to production"],
+      ["preview","Command","/preview - deploy to preview URL"],
+      ["logs","Command","/logs - tail live function/build logs"],
+      ["env","Command","/env - manage environment variables"],
+      ["rollback","Command","/rollback - revert to previous deployment"],
       ["deployment-agent","Agent","Monitors deployments, surfaces errors, triggers rollback"],
       ["review-agent","Agent","PR preview deploy + comment with URL"],
       ["monitor-agent","Agent","Watches error rates, alerts on anomalies"],
@@ -358,8 +358,8 @@ window.SECTIONS = [
   {
     id:"cursor-skills", color:"b-pink", badge:"Cursor",
     title:"Cursor skills",
-    meta:"11 skills Â· CLI + IDE",
-    desc:"~/.cursor/rules/ â€” loaded via Cursor Rules system",
+    meta:"11 skills · CLI + IDE",
+    desc:"~/.cursor/rules/ - loaded via Cursor Rules system",
     type:"table",
     columns:["Skill","Surface","Purpose"],
     rows:[
@@ -379,35 +379,35 @@ window.SECTIONS = [
   {
     id:"community-skill-repos", color:"b-orange", badge:"Community",
     title:"Community skill repos",
-    meta:"6 repos Â· open-source",
-    desc:"Curated public skill repos for Claude Code and AI agents â€” install and extend your stack",
+    meta:"6 repos · open-source",
+    desc:"Curated public skill repos for Claude Code and AI agents - install and extend your stack",
     type:"skills",
     skills:[
       {name:"marketingskills", tags:["marketing","cro","seo","copywriting","email","growth"], category:"marketing",
        desc:"40+ marketing skills by Corey Haines. Foundation is product-marketing-context which every other skill reads first. Covers CRO (page, signup, onboard, form, popup, paywall), SEO (audit, AI-SEO, programmatic, schema), copy (writing, editing, cold-email, email sequences, social, video, image), paid ads, analytics, A/B testing, churn prevention, referral programs, pricing, revops, sales enablement, competitor profiling, launch strategy, and marketing psychology.",
-       rules:["Install: npx skills add coreyhaines31/marketingskills","Or via Claude Code plugin: /plugin marketplace add coreyhaines31/marketingskills","Foundation skill product-marketing-context must exist before others activate","Skills cross-reference each other â€” copywriting <-> page-cro <-> ab-test-setup","Repo: github.com/coreyhaines31/marketingskills Â· 26.3k stars"]},
+       rules:["Install: npx skills add coreyhaines31/marketingskills","Or via Claude Code plugin: /plugin marketplace add coreyhaines31/marketingskills","Foundation skill product-marketing-context must exist before others activate","Skills cross-reference each other - copywriting <-> page-cro <-> ab-test-setup","Repo: github.com/coreyhaines31/marketingskills · 26.3k stars"]},
       {name:"stop-slop", tags:["writing","prose","ai-tells","editing","quality"], category:"writing",
        desc:"Single SKILL.md by Hardik Pandya that strips AI tells from prose. Catches banned phrases (throat-clearing openers, emphasis crutches, business jargon, adverbs), structural clichÃ©s (binary contrasts, dramatic fragmentation, false agency, narrator-from-a-distance), and sentence-level patterns (Wh- starters, em dashes, staccato fragmentation, lazy extremes). Scores output 1-10 across 5 dimensions: Directness, Rhythm, Trust, Authenticity, Density. Below 35/50 means revise.",
-       rules:["Install: copy SKILL.md into .claude/skills/ or upload to Claude Projects","No Wh- sentence starters","No em dashes â€” ever","Active voice required","No lazy extremes (never/always/everyone/nothing)","Repo: github.com/hardikpandya/stop-slop Â· 3k stars"]},
+       rules:["Install: copy SKILL.md into .claude/skills/ or upload to Claude Projects","No Wh- sentence starters","No em dashes - ever","Active voice required","No lazy extremes (never/always/everyone/nothing)","Repo: github.com/hardikpandya/stop-slop · 3k stars"]},
       {name:"ui-ux-pro-max", tags:["ui","ux","design","frontend","figma","tailwind"], category:"design",
-       desc:"Design intelligence skill by nextlevelbuilder. v2.0 flagship feature: Design System Generator â€” analyzes project type and outputs full design system (pattern + style + colors + typography + effects + anti-patterns + checklist). Contains 67 UI styles, 161 industry-specific reasoning rules, 57 font pairings, 99 UX guidelines, 25 chart types, 15 tech stacks. Supports React, Next.js, Vue, Nuxt, Svelte, Astro, SwiftUI, Flutter, React Native, HTML+Tailwind, shadcn/ui.",
-       rules:["Install: npm install -g uipro-cli && uipro init --ai claude","Or via plugin: /plugin marketplace add nextlevelbuilder/ui-ux-pro-max-skill","Python 3.x required for design system search script","Generates design-system/MASTER.md + per-page overrides for hierarchical retrieval","Repo: github.com/nextlevelbuilder/ui-ux-pro-max-skill Â· 73.6k stars"]},
+       desc:"Design intelligence skill by nextlevelbuilder. v2.0 flagship feature: Design System Generator - analyzes project type and outputs full design system (pattern + style + colors + typography + effects + anti-patterns + checklist). Contains 67 UI styles, 161 industry-specific reasoning rules, 57 font pairings, 99 UX guidelines, 25 chart types, 15 tech stacks. Supports React, Next.js, Vue, Nuxt, Svelte, Astro, SwiftUI, Flutter, React Native, HTML+Tailwind, shadcn/ui.",
+       rules:["Install: npm install -g uipro-cli && uipro init --ai claude","Or via plugin: /plugin marketplace add nextlevelbuilder/ui-ux-pro-max-skill","Python 3.x required for design system search script","Generates design-system/MASTER.md + per-page overrides for hierarchical retrieval","Repo: github.com/nextlevelbuilder/ui-ux-pro-max-skill · 73.6k stars"]},
       {name:"remotion-skills", tags:["video","remotion","animation","typescript","react"], category:"media",
-       desc:"Official agent skills package from the Remotion team (@remotion/skills). Provides Claude Code and AI agent context for programmatic video generation with Remotion â€” React-based video compositions, animations, and rendering pipelines. Internal package bundled with Remotion; auto-activates when working inside a Remotion project.",
-       rules:["Install: comes bundled with Remotion project install","Activates automatically for video composition and rendering tasks","TypeScript only â€” 100% TS codebase","Repo: github.com/remotion-dev/skills Â· 2.3k stars","No standalone install â€” use within a Remotion project context"]},
+       desc:"Official agent skills package from the Remotion team (@remotion/skills). Provides Claude Code and AI agent context for programmatic video generation with Remotion - React-based video compositions, animations, and rendering pipelines. Internal package bundled with Remotion; auto-activates when working inside a Remotion project.",
+       rules:["Install: comes bundled with Remotion project install","Activates automatically for video composition and rendering tasks","TypeScript only - 100% TS codebase","Repo: github.com/remotion-dev/skills · 2.3k stars","No standalone install - use within a Remotion project context"]},
       {name:"agent-skills-for-context-engineering", tags:["context","agents","llm","memory","multi-agent","architecture"], category:"ai-systems",
        desc:"14 skills by Muratcan Koylan covering the full context engineering stack. Cited in Peking University academic research. Foundational: context-fundamentals, context-degradation, context-compression. Architectural: multi-agent-patterns, memory-systems, tool-design, filesystem-context, hosted-agents. Operational: context-optimization, latent-briefing, evaluation, advanced-evaluation. Methodology: project-development. Cognitive: bdi-mental-states (BDI ontology for deliberative reasoning).",
-       rules:["Install: /plugin marketplace add muratcankoylan/Agent-Skills-for-Context-Engineering","Or copy individual SKILL.md files into .claude/skills/","Progressive disclosure: load skill names first, full content only on activation","Platform-agnostic â€” works across Claude Code, Cursor, any agent platform","Repo: github.com/muratcankoylan/Agent-Skills-for-Context-Engineering Â· 15.4k stars"]},
+       rules:["Install: /plugin marketplace add muratcankoylan/Agent-Skills-for-Context-Engineering","Or copy individual SKILL.md files into .claude/skills/","Progressive disclosure: load skill names first, full content only on activation","Platform-agnostic - works across Claude Code, Cursor, any agent platform","Repo: github.com/muratcankoylan/Agent-Skills-for-Context-Engineering · 15.4k stars"]},
       {name:"garden-skills (web-design-engineer)", tags:["design","html","css","ui","frontend","oklch","typography"], category:"design",
-       desc:"Single skill by ConardLi that transforms AI-generated web pages from functional to stunning. Distilled from the Claude Design system prompt (~420 lines). Enforces a 6-step workflow: understand requirements â†’ gather design context â†’ declare design system in Markdown â†’ show v0 draft early â†’ full build â†’ verify. Key mechanisms: anti-AI-clichÃ© blocklist (bans purple-pink gradients, Inter/Roboto/Arial fonts, emoji icons, fake testimonials), oklch perceptually-uniform color derivation, 6 curated color+font pairings (Modern tech, Elegant editorial, Premium brand, Lively consumer, Minimal professional, Artisan warmth), placeholder philosophy for missing assets, and an advanced-patterns.md reference library of code templates. Covers web pages, landing pages, interactive prototypes, slide decks (1920x1080), data visualizations (Chart.js/D3), animations, and design systems.",
-       rules:["Install: copy .agents/skills/web-design-engineer/ into your project (or .claude/skills/ for Claude Code)","Declare design system in Markdown BEFORE writing any code â€” non-negotiable","Show v0 draft with placeholders first; let user course-correct before full build","Never use: Inter/Roboto/Arial/Fraunces/system-ui fonts, purple-pink gradients, emoji as icons, fabricated stats","Use oklch() for all color derivation â€” not HSL or raw hex","Verify step required: no console errors, no rogue hues, responsive checks","Repo: github.com/ConardLi/garden-skills Â· 1.2k stars"]}
+       desc:"Single skill by ConardLi that transforms AI-generated web pages from functional to stunning. Distilled from the Claude Design system prompt (~420 lines). Enforces a 6-step workflow: understand requirements ←’ gather design context ←’ declare design system in Markdown ←’ show v0 draft early ←’ full build ←’ verify. Key mechanisms: anti-AI-clichÃ© blocklist (bans purple-pink gradients, Inter/Roboto/Arial fonts, emoji icons, fake testimonials), oklch perceptually-uniform color derivation, 6 curated color+font pairings (Modern tech, Elegant editorial, Premium brand, Lively consumer, Minimal professional, Artisan warmth), placeholder philosophy for missing assets, and an advanced-patterns.md reference library of code templates. Covers web pages, landing pages, interactive prototypes, slide decks (1920x1080), data visualizations (Chart.js/D3), animations, and design systems.",
+       rules:["Install: copy .agents/skills/web-design-engineer/ into your project (or .claude/skills/ for Claude Code)","Declare design system in Markdown BEFORE writing any code - non-negotiable","Show v0 draft with placeholders first; let user course-correct before full build","Never use: Inter/Roboto/Arial/Fraunces/system-ui fonts, purple-pink gradients, emoji as icons, fabricated stats","Use oklch() for all color derivation - not HSL or raw hex","Verify step required: no console errors, no rogue hues, responsive checks","Repo: github.com/ConardLi/garden-skills · 1.2k stars"]}
     ]
   },
   {
     id:"mcp-connectors", color:"b-gray", badge:"Claude.ai",
     title:"MCP connectors",
-    meta:"9 connectors Â· OAuth",
-    desc:"Connected at claude.ai â€” available in all conversations",
+    meta:"9 connectors · OAuth",
+    desc:"Connected at claude.ai - available in all conversations",
     type:"table",
     columns:["Connector","MCP URL","Use case"],
     rows:[
@@ -425,7 +425,7 @@ window.SECTIONS = [
   {
     id:"global-settings", color:"b-gray", badge:"Claude Code",
     title:"Global settings & hooks",
-    meta:"Auto-approved bash Â· 2 hooks",
+    meta:"Auto-approved bash · 2 hooks",
     desc:"~/.claude/settings.json + settings.local.json",
     type:"table",
     columns:["Setting","Detail"],
@@ -445,12 +445,12 @@ window.SECTIONS = [
     id:"claude-md", color:"b-gray", badge:"Global",
     title:"CLAUDE.md behavioral rules",
     meta:"Hard constraints + workflow rules",
-    desc:"~/.claude/CLAUDE.md â€” applies globally across all sessions",
+    desc:"~/.claude/CLAUDE.md - applies globally across all sessions",
     type:"table",
     columns:["Rule","Detail"],
     rows:[
       ["Browser","Use /browse for all web browsing. Never use mcp__claude-in-chrome__*"],
-      ["Dev stack","Cursor (orchestration) â†’ Claude Code (execution) â†’ Codex (review gate)"],
+      ["Dev stack","Cursor (orchestration) ←’ Claude Code (execution) ←’ Codex (review gate)"],
       ["Plan first","Always plan before implementing. Plan mode before code."],
       ["Verification","Run /verify before every commit. Non-negotiable."],
       ["Subagents","Use for multi-file/multi-repo tasks"],
@@ -463,7 +463,7 @@ window.SECTIONS = [
       ["MultiDomain scope","Software-only"],
       ["GKS resume","2-column table layout only"],
       ["Cover letters","No unverified metrics"],
-      ["MOSFET formula","Kn = (1/2)kn. ID = Kn(VGS - VTN)Â². No extra 1/2."],
+      ["MOSFET formula","Kn = (1/2)kn. ID = Kn(VGS - VTN)^2. No extra 1/2."],
       ["Project Lizard","Socratic coaching only"]
     ]
   }
@@ -520,7 +520,7 @@ window.renderCards = function renderCards(filter=''){
     totalHits += matchedRows.length;
     html += `<div class="gr-section">
       <div class="gr-section-title"><span class="badge ${s.color}" style="cursor:pointer" onclick="openSection('${s.id}')">${s.badge}: ${s.title}</span></div>
-      ${matchedRows.map(r=>`<div class="gr-row" onclick="openSection('${s.id}')"><code>${hl(r[0],filter)}</code><span class="gr-desc">${hl(r.slice(1).join(' Â· '),filter)}</span></div>`).join('')}
+      ${matchedRows.map(r=>`<div class="gr-row" onclick="openSection('${s.id}')"><code>${hl(r[0],filter)}</code><span class="gr-desc">${hl(r.slice(1).join(' · '),filter)}</span></div>`).join('')}
     </div>`;
   });
 
@@ -542,7 +542,7 @@ window.openSection = function openSection(id){
   document.getElementById('detail-header').innerHTML = `
     <div><span class="badge ${s.color}">${s.badge}</span></div>
     <h2>${s.title}</h2>
-    <div class="desc">${s.meta} Â· ${s.desc}</div>
+    <div class="desc">${s.meta} · ${s.desc}</div>
   `;
   renderDetail(s, '');
 }
@@ -608,6 +608,8 @@ renderCards('');
   <script src="skill-sections.js"></script>
 </body>
 </html>
+
+
 
 
 
