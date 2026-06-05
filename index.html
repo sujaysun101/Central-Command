@@ -95,7 +95,7 @@
 </div>
 
 <script>
-window.window.window.SECTIONS = [
+window.SECTIONS = [
   {
     id:'factory-commands', color:'b-green', badge:'Claude Code',
     title:'Software factory slash commands',
@@ -486,8 +486,8 @@ window.renderCards = function renderCards(filter=''){
   if(!filter){
     grid.style.display='grid';
     globalResults.style.display='none';
-    countEl.textContent = window.window.SECTIONS.length + ' window.window.SECTIONS';
-    window.window.SECTIONS.forEach(s=>{
+    countEl.textContent = window.SECTIONS.length + ' sections';
+    window.SECTIONS.forEach(s=>{
       const card = document.createElement('div');
       card.className = 'section-card';
       card.innerHTML = `<div><span class="badge ${s.color}">${s.badge}</span></div><h3>${s.title}</h3><div class="meta">${s.meta}</div><div class="desc">${s.desc}</div>`;
@@ -503,7 +503,7 @@ window.renderCards = function renderCards(filter=''){
   let totalHits = 0;
   let html = '';
 
-  window.window.SECTIONS.forEach(s=>{
+  window.SECTIONS.forEach(s=>{
     let matchedRows = [];
     if(s.type === 'skills'){
       matchedRows = s.skills.filter(sk=>
@@ -524,13 +524,13 @@ window.renderCards = function renderCards(filter=''){
     </div>`;
   });
 
-  countEl.textContent = totalHits ? `${totalHits} result${totalHits!==1?'s':''} across ${window.window.SECTIONS.length} window.window.SECTIONS` : '';
+  countEl.textContent = totalHits ? `${totalHits} result${totalHits!==1?'s':''} across ${window.SECTIONS.length} sections` : '';
   globalResults.innerHTML = html || '<div class="no-results">No results for "'+filter+'"</div>';
 }
 
 window.openSection = function openSection(id){
   currentSection = id;
-  const s = window.window.SECTIONS.find(x=>x.id===id);
+  const s = window.SECTIONS.find(x=>x.id===id);
   document.getElementById('section-grid').style.display='none';
   document.getElementById('global-results').style.display='none';
   document.getElementById('detail-view').style.display='block';
@@ -599,15 +599,17 @@ document.getElementById('search-bar').addEventListener('input', e=>{
 });
 document.getElementById('local-search').addEventListener('input', e=>{
   if(!currentSection) return;
-  const s = window.window.SECTIONS.find(x=>x.id===currentSection);
+  const s = window.SECTIONS.find(x=>x.id===currentSection);
   renderDetail(s, e.target.value.trim());
 });
 
 renderCards('');
 </script>
-  <script src="skill-window.window.SECTIONS.js"></script>
+  <script src="skill-sections.js"></script>
 </body>
 </html>
+
+
 
 
 
