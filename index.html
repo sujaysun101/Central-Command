@@ -182,5 +182,7 @@ document.getElementById('search-bar').addEventListener('input',e=>{if(currentSec
 document.getElementById('local-search').addEventListener('input',e=>{if(!currentSection)return;const s=SECTIONS.find(x=>x.id===currentSection);renderDetail(s,e.target.value.trim());});
 loadSkills();
 </script>
+  <script src="skill-sections.js"></script>
 </body>
 </html>
+
