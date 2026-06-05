@@ -95,7 +95,7 @@
 </div>
 
 <script>
-window.window.SECTIONS = [
+window.window.window.SECTIONS = [
   {
     id:'factory-commands', color:'b-green', badge:'Claude Code',
     title:'Software factory slash commands',
@@ -477,7 +477,7 @@ function hl(text, q){
   return String(text).replace(re,'<mark>$1</mark>');
 }
 
-function renderCards(filter=''){
+window.renderCards = function renderCards(filter=''){
   const grid = document.getElementById('section-grid');
   const globalResults = document.getElementById('global-results');
   const countEl = document.getElementById('count-label');
@@ -486,8 +486,8 @@ function renderCards(filter=''){
   if(!filter){
     grid.style.display='grid';
     globalResults.style.display='none';
-    countEl.textContent = window.SECTIONS.length + ' window.SECTIONS';
-    window.SECTIONS.forEach(s=>{
+    countEl.textContent = window.window.SECTIONS.length + ' window.window.SECTIONS';
+    window.window.SECTIONS.forEach(s=>{
       const card = document.createElement('div');
       card.className = 'section-card';
       card.innerHTML = `<div><span class="badge ${s.color}">${s.badge}</span></div><h3>${s.title}</h3><div class="meta">${s.meta}</div><div class="desc">${s.desc}</div>`;
@@ -503,7 +503,7 @@ function renderCards(filter=''){
   let totalHits = 0;
   let html = '';
 
-  window.SECTIONS.forEach(s=>{
+  window.window.SECTIONS.forEach(s=>{
     let matchedRows = [];
     if(s.type === 'skills'){
       matchedRows = s.skills.filter(sk=>
@@ -524,13 +524,13 @@ function renderCards(filter=''){
     </div>`;
   });
 
-  countEl.textContent = totalHits ? `${totalHits} result${totalHits!==1?'s':''} across ${window.SECTIONS.length} window.SECTIONS` : '';
+  countEl.textContent = totalHits ? `${totalHits} result${totalHits!==1?'s':''} across ${window.window.SECTIONS.length} window.window.SECTIONS` : '';
   globalResults.innerHTML = html || '<div class="no-results">No results for "'+filter+'"</div>';
 }
 
-function openSection(id){
+window.openSection = function openSection(id){
   currentSection = id;
-  const s = window.SECTIONS.find(x=>x.id===id);
+  const s = window.window.SECTIONS.find(x=>x.id===id);
   document.getElementById('section-grid').style.display='none';
   document.getElementById('global-results').style.display='none';
   document.getElementById('detail-view').style.display='block';
@@ -547,7 +547,7 @@ function openSection(id){
   renderDetail(s, '');
 }
 
-function renderDetail(s, filter=''){
+window.renderDetail = function renderDetail(s, filter=''){
   const content = document.getElementById('detail-content');
   const countEl = document.getElementById('detail-count');
   const q = filter.toLowerCase();
@@ -582,7 +582,7 @@ function renderDetail(s, filter=''){
   }
 }
 
-function goBack(){
+window.goBack = function goBack(){
   currentSection = null;
   document.getElementById('section-grid').style.display='grid';
   document.getElementById('global-results').style.display='none';
@@ -599,14 +599,15 @@ document.getElementById('search-bar').addEventListener('input', e=>{
 });
 document.getElementById('local-search').addEventListener('input', e=>{
   if(!currentSection) return;
-  const s = window.SECTIONS.find(x=>x.id===currentSection);
+  const s = window.window.SECTIONS.find(x=>x.id===currentSection);
   renderDetail(s, e.target.value.trim());
 });
 
 renderCards('');
 </script>
-  <script src="skill-window.SECTIONS.js"></script>
+  <script src="skill-window.window.SECTIONS.js"></script>
 </body>
 </html>
+
 
 

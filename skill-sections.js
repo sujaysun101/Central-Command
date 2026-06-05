@@ -29,14 +29,7 @@
     if(raw.copies) rules.push('Copies: ' + raw.copies);
     if(stores.length) rules.push('Stores: ' + stores.join(', '));
     if(example) rules.push('Example: ' + example);
-    return {
-      name,
-      desc: desc || 'No description provided.',
-      category: stores[0] || 'imported',
-      tags: stores.length ? stores : ['imported'],
-      rules,
-      _text: text
-    };
+    return { name, desc: desc || 'No description provided.', category: stores[0] || 'imported', tags: stores.length ? stores : ['imported'], rules, _text: text };
   }
 
   function buildSection(bucket, skills){
@@ -57,31 +50,30 @@
   }
 
   async function loadImportedSkills(){
-    if (typeof SECTIONS === "undefined") return;
+    if(!window.SECTIONS || !window.renderCards) {
+      console.error('Central Command import failed: window.SECTIONS or window.renderCards is missing');
+      return;
+    }
+
     const res = await fetch('skills.json?ts=' + Date.now(), {cache:'no-store'});
-    if(!res.ok) return;
+    if(!res.ok) throw new Error('Could not fetch skills.json: ' + res.status);
 
     const catalog = await res.json();
     const rawSkills = Array.isArray(catalog) ? catalog : catalog.skills;
-    if(!Array.isArray(rawSkills)) return;
+    if(!Array.isArray(rawSkills)) throw new Error('skills.json does not contain a skills array');
 
     const normalized = rawSkills.map(normalize);
-    const importedSections = [];
-
-    importedSections.push(buildSection(BUCKETS[0], normalized.slice()));
+    const importedSections = [buildSection(BUCKETS[0], normalized.slice())];
 
     for(const bucket of BUCKETS.slice(1)){
       const matches = normalized.filter(skill => bucketFor(skill)?.id === bucket.id);
       if(matches.length) importedSections.push(buildSection(bucket, matches));
     }
 
-    SECTIONS.push(...importedSections);
-
-    const oldRenderCards = renderCards;
-    oldRenderCards('');
+    window.SECTIONS.push(...importedSections);
+    window.renderCards('');
+    console.log('Central Command imported skills loaded:', normalized.length, 'skills,', importedSections.length, 'sections');
   }
 
   loadImportedSkills().catch(console.error);
 })();
-
-
