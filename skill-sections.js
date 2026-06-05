@@ -57,7 +57,7 @@
   }
 
   async function loadImportedSkills(){
-    if(!window.SECTIONS) return;
+    if (typeof SECTIONS === "undefined") return;
     const res = await fetch('skills.json?ts=' + Date.now(), {cache:'no-store'});
     if(!res.ok) return;
 
@@ -75,11 +75,12 @@
       if(matches.length) importedSections.push(buildSection(bucket, matches));
     }
 
-    window.SECTIONS.push(...importedSections);
+    SECTIONS.push(...importedSections);
 
-    const oldRenderCards = window.renderCards || renderCards;
+    const oldRenderCards = renderCards;
     oldRenderCards('');
   }
 
   loadImportedSkills().catch(console.error);
 })();
+
